@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import mockData from "./mockData";
-import CourseList from "./components/CourseList";
+import React, { useState } from 'react';
+import mockData from '../mockData';
+import CourseList from '../components/CourseList';
 
 const Courses = () => {
   const [courseList, setCourseList] = useState(mockData);
