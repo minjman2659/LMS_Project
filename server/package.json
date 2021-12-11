@@ -1,0 +1,46 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "LMS_Project Server",
+  "main": "index.js",
+  "author": "Min Jae Kim",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/minjman2659/LMS_Project.git"
+  },
+  "scripts": {
+    "dev": " NODE_PATH=./src nodemon ./src/server.js",
+    "db:migrate": "NODE_PATH=./src ./scripts/db-migrate.sh",
+    "db:sync": "NODE_PATH=./src node ./scripts/db-sync.js",
+    "test": "./scripts/test.sh"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.1.7",
+    "eslint-plugin-prettier": "^3.3.1",
+    "jest": "^26.6.3",
+    "node-mocks-http": "^1.10.1",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1",
+    "sequelize-cli": "^6.2.0"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "date-fns": "^2.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "joi": "^17.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.2",
+    "nanoid": "^3.1.21",
+    "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.5.0",
+    "supertest": "^6.1.3"
+  }
+}
