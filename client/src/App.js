@@ -15,7 +15,7 @@ const StyledHeader = styled(Layout.Header)`
   background-color: #fff;
 `;
 const StyledContent = styled(Layout.Content)`
-  padding-top: 120px;
+  padding-top: 100px;
   margin: 0 auto;
   text-align: center;
 `;

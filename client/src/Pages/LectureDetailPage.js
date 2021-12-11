@@ -51,7 +51,7 @@ const LectureDetailPage = () => {
           <Typography.Title style={{ textAlign: "left" }}>
             #0.0 Welcome
           </Typography.Title>
-          <Card hoverable cover={<img alt="card" src="" />}>
+          <Card hoverable cover={<img height="250" alt="card" src="" />}>
             <Card.Meta title="카드" description="설명" />
           </Card>
         </Col>

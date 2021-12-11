@@ -5,8 +5,8 @@ import styled from "styled-components";
 import path from "../lib/path";
 
 const StyledCard = styled(Card)`
-  width: 660px;
-  height: 500px;
+  width: 700px;
+  height: 450px;
 `;
 
 const CourseInfoPage = () => {
@@ -16,7 +16,7 @@ const CourseInfoPage = () => {
       <StyledCard hoverable cover={<img alt="card" src="" />}>
         <Card.Meta title="카드" description="설명" />
       </StyledCard>
-      <Row gutter={16} justify="center" style={{ marginTop: 32 }}>
+      <Row gutter={16} justify="center" style={{ marginTop: 20 }}>
         <Col span={12}>
           <Typography.Text style={{ fontSize: 24 }}>50,000원</Typography.Text>
         </Col>
