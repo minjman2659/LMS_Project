@@ -6,7 +6,7 @@ import "antd/dist/antd.css";
 import path from "../lib/path";
 
 const StyledCard = styled(Card)`
-  max-height: 200px;
+  max-height: 240px;
   max-width: 320px;
 `;
 
@@ -14,21 +14,24 @@ const Home = () => {
   const navigator = useNavigate();
   const tempCourseData = [
     {
-      title: "예시1",
-      description: "설명1",
-      imageUrl: "",
+      title: "코코아톡 클론코딩",
+      description: "HTML, CSS, JavaScript",
+      imageUrl:
+        "https://media.discordapp.net/attachments/885202056355397686/918709142816981073/image.png?width=1664&height=936",
       alt: "image",
     },
     {
-      title: "예시1",
-      description: "설명1",
-      imageUrl: "",
+      title: "유튜브 클론코딩",
+      description: "HTML, CSS, Github",
+      imageUrl:
+        "https://media.discordapp.net/attachments/885202056355397686/918710553852141628/image.png?width=1664&height=936",
       alt: "image",
     },
     {
-      title: "예시1",
-      description: "설명1",
-      imageUrl: "",
+      title: "인스타그램 클론코딩",
+      description: "백엔드, 프론트엔드, 배포",
+      imageUrl:
+        "https://media.discordapp.net/attachments/885202056355397686/918710586362167326/image.png?width=1664&height=936",
       alt: "image",
     },
   ];

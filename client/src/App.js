@@ -47,7 +47,13 @@ function App() {
       <Layout.Footer style={{}}>
         <Row justify="space-between">
           <Typography>© 2021 MinJae Kim. All rights reserved.</Typography>
-          <GithubOutlined style={{ fontSize: 24, cursor: "pointer" }} />
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://github.com/minjman2659/LMS_Project"
+          >
+            <GithubOutlined style={{ fontSize: 24, cursor: "pointer" }} />
+          </a>
         </Row>
       </Layout.Footer>
     </StyledLayout>
