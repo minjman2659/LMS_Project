@@ -47,15 +47,9 @@ exports.register = async (req, res, next) => {
       transaction: t,
     });
 
-    const tokens = await user.generateUserToken();
-
-    setTokenCookie(res, tokens);
-
     await t.commit();
 
-    const returnUser = { ...user.dataValues };
-    delete returnUser.password;
-    res.status(201).send(returnUser);
+    res.sendStatus(201);
   } catch (err) {
     await t.rollback();
     next(err);
@@ -99,7 +93,9 @@ exports.login = async (req, res, next) => {
     const tokens = await user.generateUserToken();
 
     setTokenCookie(res, tokens);
-    res.sendStatus(200);
+    const returnUser = { ...user.dataValues };
+    delete returnUser.password;
+    res.status(200).send(returnUser);
   } catch (err) {
     next(err);
   }
