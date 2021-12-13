@@ -40,7 +40,7 @@ exports.register = async (req, res, next) => {
   const t = await db.transaction();
 
   try {
-    const user = await User.register({
+    await User.register({
       username,
       email,
       password,
