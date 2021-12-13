@@ -17,6 +17,7 @@ const AppRouter = ({ isLogin, setIsLogin }) => {
         <>
           <Route path={path.main} element={<Home />} />
           <Route path={path.courseInfo} element={<CourseInfoPage />} />
+          <Route path={path.register} element={<RegisterPage />} />
           <Route path="/*" element={<LoginPage setIsLogin={setIsLogin} />} />
         </>
       ) : (
