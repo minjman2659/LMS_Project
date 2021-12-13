@@ -1,46 +1,68 @@
-import { GoogleOutlined } from "@ant-design/icons";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Checkbox } from "antd";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+import path from "../lib/path";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 const LoginPage = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+  const navigator = useNavigate();
+  const onFinish = async (values) => {
+    console.log("Received values of form: ", values);
   };
 
   return (
     <Form
-      name="basic"
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
-      initialValues={{ remember: true }}
+      name="normal_login"
+      className="login-form"
+      initialValues={{
+        remember: true,
+      }}
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      autoComplete="off"
     >
       <Form.Item
-        label="Username"
-        name="username"
-        rules={[{ required: true, message: "Please input your username!" }]}
+        name="email"
+        rules={[
+          {
+            required: true,
+            message: "Please input your Email!",
+          },
+        ]}
       >
-        <Input />
+        <Input
+          prefix={<UserOutlined className="site-form-item-icon" />}
+          placeholder="Email"
+        />
+      </Form.Item>
+      <Form.Item
+        name="password"
+        rules={[
+          {
+            required: true,
+            message: "Please input your Password!",
+          },
+        ]}
+      >
+        <Input
+          prefix={<LockOutlined className="site-form-item-icon" />}
+          type="password"
+          placeholder="Password"
+        />
+      </Form.Item>
+      <Form.Item>
+        <Form.Item name="remember" valuePropName="checked" noStyle>
+          <Checkbox>Remember me</Checkbox>
+        </Form.Item>
       </Form.Item>
 
-      <Form.Item
-        label="Password"
-        name="password"
-        rules={[{ required: true, message: "Please input your password!" }]}
-      >
-        <Input.Password />
-      </Form.Item>
-      <Form.Item style={{ justifyContent: "center" }}>
-        <Button type="primary" htmlType="submit">
-          로그인
+      <Form.Item>
+        <Button type="primary" htmlType="submit" className="login-form-button">
+          Log in
         </Button>
+        <br />
+        <br />
+        Or <a href="/register">register now!</a>
       </Form.Item>
-      <Button icon={<GoogleOutlined />}>구글로 3초만에 로그인하기</Button>
     </Form>
   );
 };

@@ -13,8 +13,20 @@ const CourseInfoPage = () => {
   const navigate = useNavigate();
   return (
     <>
-      <StyledCard hoverable cover={<img alt="card" src="" />}>
-        <Card.Meta title="카드" description="설명" />
+      <StyledCard
+        hoverable
+        cover={
+          <img
+            height="350"
+            alt="card"
+            src="https://media.discordapp.net/attachments/885202056355397686/919804133513506886/unknown.png?width=1920&height=878"
+          />
+        }
+      >
+        <Card.Meta
+          title="[풀스택] 유튜브 클론코딩"
+          description="프론트와 백엔드, 그리고 배포까지! 모든 과정을 한 강의에 담았다."
+        />
       </StyledCard>
       <Row gutter={16} justify="center" style={{ marginTop: 20 }}>
         <Col span={12}>

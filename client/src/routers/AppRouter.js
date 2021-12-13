@@ -4,8 +4,11 @@ import path from "../lib/path";
 import CourseDetailPage from "../Pages/CourseDetailPage";
 import CourseInfoPage from "../Pages/CourseInfoPage";
 import Home from "../Pages/Home";
-import LectureDetailPage from "../Pages/LectureDetailPage";
+import LectureDetailPageWelcome from "../Pages/LectureDetailPage_Welcome";
+import LectureDetailPageMovie from "../Pages/LectureDetailPage_Movie";
+import LectureDetailPageImage from "../Pages/LectureDetailPage_Image";
 import LoginPage from "../Pages/LoginPage";
+import RegisterPage from "../Pages/RegisterPage";
 
 const AppRouter = () => {
   const isLoggedIn = true;
@@ -18,8 +21,20 @@ const AppRouter = () => {
           <Route path={path.main} element={<Home />} />
           <Route path={path.courseInfo} element={<CourseInfoPage />} />
           <Route path={path.courseDetail} element={<CourseDetailPage />} />
-          <Route path={path.lectureDetail} element={<LectureDetailPage />} />
+          <Route
+            path={path.lectureDetail_welcome}
+            element={<LectureDetailPageWelcome />}
+          />
+          <Route
+            path={path.lectureDetail_movie}
+            element={<LectureDetailPageMovie />}
+          />
+          <Route
+            path={path.lectureDetail_image}
+            element={<LectureDetailPageImage />}
+          />
           <Route path={path.login} element={<LoginPage />} />
+          <Route path={path.register} element={<RegisterPage />} />
         </>
       )}
     </Routes>
