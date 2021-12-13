@@ -5,10 +5,32 @@ import path from "../lib/path";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
-const LoginPage = () => {
+const LoginPage = ({ setIsLogin = () => {} }) => {
   const navigator = useNavigate();
+  const url = process.env.REACT_APP_API_URL || "http://localhost:4000";
+
   const onFinish = async (values) => {
     console.log("Received values of form: ", values);
+    try {
+      const loginUser = await axios.post(`${url}/api/v1/auth/login`, {
+        email: values.email,
+        password: values.password,
+      });
+      localStorage.setItem(
+        "userInfo",
+        JSON.stringify({
+          id: loginUser.data.id,
+          username: loginUser.data.username,
+          email: loginUser.data.email,
+        })
+      );
+      setIsLogin(true);
+      alert("로그인 되었습니다.");
+      navigator(path.main);
+    } catch (err) {
+      console.log(err);
+      alert("다시 로그인 해주세요.");
+    }
   };
 
   return (

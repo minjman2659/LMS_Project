@@ -1,11 +1,18 @@
+import { useState, useEffect } from "react";
 import { Col, Layout, Row, Typography } from "antd";
 import styled from "styled-components";
-import { GithubOutlined, UserDeleteOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import {
+  GithubOutlined,
+  UserDeleteOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import { Link, useNavigate } from "react-router-dom";
 
 import "antd/dist/antd.css";
 import AppRouter from "./routers/AppRouter";
 import path from "./lib/path";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 const StyledLayout = styled(Layout)`
   height: 100vh;
@@ -21,6 +28,30 @@ const StyledContent = styled(Layout.Content)`
 `;
 
 function App() {
+  const url = process.env.REACT_APP_API_URL || "http://localhost:4000";
+  const navigator = useNavigate();
+  const [isLogin, setIsLogin] = useState(false);
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("userInfo"))) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, []);
+
+  const logout = async () => {
+    try {
+      await axios.post(`${url}/api/v1/auth/logout`, null);
+      setIsLogin(false);
+      localStorage.clear();
+      alert("로그아웃 되었습니다.");
+      navigator(path.main);
+    } catch (err) {
+      console.log(err);
+      alert("다시 시도해주세요");
+    }
+  };
+
   return (
     <StyledLayout>
       <StyledHeader>
@@ -34,15 +65,29 @@ function App() {
           </Col>
           <Col>
             {/* TODO : 로그인 성공하면 아이콘 변경 */}
-            <UserDeleteOutlined style={{ marginRight: 8 }} />
-            <Link to={path.login}>
-              <Typography.Text>Log in</Typography.Text>
-            </Link>
+            {isLogin ? (
+              <>
+                <UserDeleteOutlined style={{ marginRight: 8 }} />
+                <Typography.Text
+                  style={{ cursor: "pointer" }}
+                  onClick={() => logout()}
+                >
+                  Log out
+                </Typography.Text>
+              </>
+            ) : (
+              <>
+                <UserOutlined style={{ marginRight: 8 }} />
+                <Link to={path.login}>
+                  <Typography.Text>Log in</Typography.Text>
+                </Link>
+              </>
+            )}
           </Col>
         </Row>
       </StyledHeader>
       <StyledContent>
-        <AppRouter />
+        <AppRouter isLogin={isLogin} setIsLogin={setIsLogin} />
       </StyledContent>
       <Layout.Footer style={{}}>
         <Row justify="space-between">

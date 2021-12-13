@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-
 import path from "../lib/path";
 import CourseDetailPage from "../Pages/CourseDetailPage";
 import CourseInfoPage from "../Pages/CourseInfoPage";
@@ -10,12 +9,16 @@ import LectureDetailPageImage from "../Pages/LectureDetailPage_Image";
 import LoginPage from "../Pages/LoginPage";
 import RegisterPage from "../Pages/RegisterPage";
 
-const AppRouter = () => {
-  const isLoggedIn = true;
+const AppRouter = ({ isLogin, setIsLogin }) => {
+  // const isLoggedIn = true;
   return (
     <Routes>
-      {!isLoggedIn ? (
-        <Route path="/*" element={<LoginPage />} />
+      {!isLogin ? (
+        <>
+          <Route path={path.main} element={<Home />} />
+          <Route path={path.courseInfo} element={<CourseInfoPage />} />
+          <Route path="/*" element={<LoginPage setIsLogin={setIsLogin} />} />
+        </>
       ) : (
         <>
           <Route path={path.main} element={<Home />} />
@@ -33,7 +36,6 @@ const AppRouter = () => {
             path={path.lectureDetail_image}
             element={<LectureDetailPageImage />}
           />
-          <Route path={path.login} element={<LoginPage />} />
           <Route path={path.register} element={<RegisterPage />} />
         </>
       )}
