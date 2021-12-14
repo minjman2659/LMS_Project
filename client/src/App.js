@@ -59,7 +59,9 @@ function App() {
           <Col>
             <Row>
               <Link to={path.main}>
-                <Typography.Text>Courses</Typography.Text>
+                <Typography.Text style={{ fontSize: "large" }}>
+                  Courses
+                </Typography.Text>
               </Link>
             </Row>
           </Col>
@@ -69,7 +71,7 @@ function App() {
               <>
                 <UserDeleteOutlined style={{ marginRight: 8 }} />
                 <Typography.Text
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", fontSize: "large" }}
                   onClick={() => logout()}
                 >
                   Log out
@@ -79,7 +81,9 @@ function App() {
               <>
                 <UserOutlined style={{ marginRight: 8 }} />
                 <Link to={path.login}>
-                  <Typography.Text>Log in</Typography.Text>
+                  <Typography.Text style={{ fontSize: "large" }}>
+                    Log in
+                  </Typography.Text>
                 </Link>
               </>
             )}

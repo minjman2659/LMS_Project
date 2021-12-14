@@ -1,7 +1,6 @@
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import path from "../lib/path";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
@@ -26,7 +25,7 @@ const LoginPage = ({ setIsLogin = () => {} }) => {
       );
       setIsLogin(true);
       alert("로그인 되었습니다.");
-      navigator(path.main);
+      navigator(-1);
     } catch (err) {
       console.log(err);
       alert("다시 로그인 해주세요.");
