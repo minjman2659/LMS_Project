@@ -14,7 +14,7 @@ const StyledCard = styled(Card)`
   max-width: 520px;
 `;
 
-const Home = ({ setIsCourseState }) => {
+const Home = ({ setCourseState }) => {
   const navigator = useNavigate();
 
   return (
@@ -31,7 +31,7 @@ const Home = ({ setIsCourseState }) => {
                   style={{ width: 440 }}
                   cover={<img alt={course.alt} src={course.imageUrl} />}
                   onClick={() => {
-                    setIsCourseState(course);
+                    setCourseState(course);
                     navigator(path.courseInfo);
                   }}
                 >
@@ -51,7 +51,7 @@ const Home = ({ setIsCourseState }) => {
                   style={{ width: 440 }}
                   cover={<img alt={course.alt} src={course.imageUrl} />}
                   onClick={() => {
-                    setIsCourseState(course);
+                    setCourseState(course);
                     navigator(path.courseInfo);
                   }}
                 >
@@ -71,7 +71,7 @@ const Home = ({ setIsCourseState }) => {
                   style={{ width: 440 }}
                   cover={<img alt={course.alt} src={course.imageUrl} />}
                   onClick={() => {
-                    setIsCourseState(course);
+                    setCourseState(course);
                     navigator(path.courseInfo);
                   }}
                 >

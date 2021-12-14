@@ -1,5 +1,6 @@
 export const best = [
   {
+    courseId: 1,
     title: "코코아톡 클론코딩",
     description: "HTML, CSS, JavaScript",
     imageUrl:
@@ -9,6 +10,7 @@ export const best = [
     alt: "image",
   },
   {
+    courseId: 2,
     title: "유튜브 클론코딩",
     description: "HTML, CSS, Github",
     imageUrl:
@@ -18,6 +20,7 @@ export const best = [
     alt: "image",
   },
   {
+    courseId: 3,
     title: "인스타그램 클론코딩",
     description: "백엔드, 프론트엔드, 배포",
     imageUrl:
@@ -30,6 +33,7 @@ export const best = [
 
 export const development = [
   {
+    courseId: 4,
     title: "iOS 개발자 되기",
     description: "iOS",
     imageUrl:
@@ -39,6 +43,7 @@ export const development = [
     alt: "image",
   },
   {
+    courseId: 5,
     title: "한번에 배우는 뷰 + 타입스크립트",
     description: "View, TypeScript",
     imageUrl:
@@ -48,6 +53,7 @@ export const development = [
     alt: "image",
   },
   {
+    courseId: 6,
     title: "하루 11분 Python 코딩 마스터",
     description: "Python",
     imageUrl:
@@ -60,6 +66,7 @@ export const development = [
 
 export const design = [
   {
+    courseId: 7,
     title: "3D 모델링, 입문부터 취업까지",
     description: "3D 모델링",
     imageUrl:
@@ -69,6 +76,7 @@ export const design = [
     alt: "image",
   },
   {
+    courseId: 8,
     title: "기초부터 UX/UI 전문가 되기",
     description: "UX, UI",
     imageUrl:
@@ -78,6 +86,7 @@ export const design = [
     alt: "image",
   },
   {
+    courseId: 9,
     title: "영상 편집 프로 과정",
     description: "영상",
     imageUrl:

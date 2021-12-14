@@ -10,7 +10,7 @@ const StyledCard = styled(Card)`
   max-width: 520px;
 `;
 
-const MyCoursePage = ({ myCourses, setIsCourseState }) => {
+const MyCoursePage = ({ myCourses, setCourseState }) => {
   const navigator = useNavigate();
 
   return (
@@ -27,7 +27,7 @@ const MyCoursePage = ({ myCourses, setIsCourseState }) => {
                 style={{ width: 240 }}
                 cover={<img alt={course.alt} src={course.imageUrl} />}
                 onClick={() => {
-                  setIsCourseState(course);
+                  setCourseState(course);
                   navigator(path.courseDetail);
                 }}
               >

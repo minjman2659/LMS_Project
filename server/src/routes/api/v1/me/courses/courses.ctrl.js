@@ -3,8 +3,9 @@ const Joi = require('joi');
 const { validateSchema } = require('lib/utils');
 const { Course } = require('database/models');
 
-exports.create = async (req, res, next) => {
+exports.add = async (req, res, next) => {
   const schema = Joi.object().keys({
+    courseId: Joi.integer().required(),
     title: Joi.string().min(2).max(20).required(),
     description: Joi.string().max(2000).required(),
     imageUrl: Joi.string().required(),
@@ -13,12 +14,13 @@ exports.create = async (req, res, next) => {
 
   if (!validateSchema(res, schema, req.body)) return;
 
-  const { title, description, imageUrl, courseInfoUrl } = req.body;
+  const { courseId, title, description, imageUrl, courseInfoUrl } = req.body;
 
   const { id: userId } = req.user;
 
   try {
     await Course.create({
+      courseId,
       title,
       description,
       imageUrl,
@@ -34,7 +36,7 @@ exports.create = async (req, res, next) => {
 };
 
 exports.list = async (req, res, next) => {
-  const { userId } = req.params;
+  const { id: userId } = req.user;
 
   if (!Number(userId)) {
     res.status(400).send('Bad request');

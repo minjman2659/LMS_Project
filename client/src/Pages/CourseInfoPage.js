@@ -17,14 +17,14 @@ const CourseInfoPage = ({
   userInfo,
   isLogin,
   myCourses,
-  setIsMyCourses,
+  setMyCourses,
   courseState,
 }) => {
   const url = process.env.REACT_APP_API_URL || "http://localhost:4000";
   const navigate = useNavigate();
 
-  const check = (courseTitle) => {
-    const filterBy = myCourses.filter((el) => el.title === courseTitle);
+  const check = (courseId) => {
+    const filterBy = myCourses.filter((el) => el.courseId === courseId);
     return filterBy.length === 0;
   }
 
@@ -48,11 +48,12 @@ const CourseInfoPage = ({
         // callback
         const copied = myCourses.slice();
         copied.push(courseState);
-        setIsMyCourses(copied);
+        setMyCourses(copied);
         if (rsp.success) {
           // 결제 성공 시 로직,
           alert("결제 완료했습니다. 마이 페이지로 이동합니다.");
-          await axios.post(`${url}/api/v1/courses/`, {
+          await axios.post(`${url}/api/v1/me/courses/`, {
+            courseId: courseState.courseId,
             title: courseState.title,
             description: courseState.description,
             imageUrl: courseState.imageUrl,
@@ -63,7 +64,8 @@ const CourseInfoPage = ({
           // 결제 실패 시 로직,
           alert("이번만 넘어갑니다.");
           alert("마이페이지로 이동합니다.");
-          await axios.post(`${url}/api/v1/courses`, {
+          await axios.post(`${url}/api/v1/me/courses/`, {
+            courseId: courseState.courseId,
             title: courseState.title,
             description: courseState.description,
             imageUrl: courseState.imageUrl,
@@ -94,7 +96,7 @@ const CourseInfoPage = ({
           <Button
             style={{ width: "100%" }}
             onClick={() =>
-              !check(courseState.title) ? alert("이미 결제한 강의입니다.") :
+              !check(courseState.courseId) ? alert("이미 결제한 강의입니다.") :
               isLogin ? requestPay(userInfo, courseState) : navigate(path.login)
             }
           >

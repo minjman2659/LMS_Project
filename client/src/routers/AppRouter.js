@@ -12,13 +12,13 @@ import MyCoursePage from "../Pages/MyCoursePage";
 
 const AppRouter = ({
   isLogin,
-  setIsLogin,
+  setLogin,
   userInfo,
-  setIsUserInfo,
+  setUserInfo,
   myCourses,
-  setIsMyCourses,
+  setMyCourses,
   courseState,
-  setIsCourseState,
+  setCourseState,
 }) => {
   // const isLoggedIn = true;
   return (
@@ -27,7 +27,7 @@ const AppRouter = ({
         <>
           <Route
             path={path.main}
-            element={<Home setIsCourseState={setIsCourseState} />}
+            element={<Home setCourseState={setCourseState} />}
           />
           <Route
             path={path.courseInfo}
@@ -36,7 +36,7 @@ const AppRouter = ({
                 userInfo={userInfo}
                 isLogin={isLogin}
                 myCourses={myCourses}
-                setIsMyCourses={setIsMyCourses}
+                setMyCourses={setMyCourses}
                 courseState={courseState}
               />
             }
@@ -46,8 +46,8 @@ const AppRouter = ({
             path="/*"
             element={
               <LoginPage
-                setIsLogin={setIsLogin}
-                setIsUserInfo={setIsUserInfo}
+                setLogin={setLogin}
+                setUserInfo={setUserInfo}
               />
             }
           />
@@ -56,7 +56,7 @@ const AppRouter = ({
         <>
           <Route
             path={path.main}
-            element={<Home setIsCourseState={setIsCourseState} />}
+            element={<Home setCourseState={setCourseState} />}
           />
           <Route
             path={path.courseInfo}
@@ -65,7 +65,7 @@ const AppRouter = ({
                 userInfo={userInfo}
                 isLogin={isLogin}
                 myCourses={myCourses}
-                setIsMyCourses={setIsMyCourses}
+                setMyCourses={setMyCourses}
                 courseState={courseState}
               />
             }
@@ -75,8 +75,8 @@ const AppRouter = ({
             element={
               <MyCoursePage
                 myCourses={myCourses}
-                setIsMyCourses={setIsMyCourses}
-                setIsCourseState={setIsCourseState}
+                setMyCourses={setMyCourses}
+                setCourseState={setCourseState}
                 userInfo={userInfo}
               />
             }

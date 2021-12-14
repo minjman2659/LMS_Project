@@ -30,46 +30,46 @@ const StyledContent = styled(Layout.Content)`
 function App() {
   const url = process.env.REACT_APP_API_URL || "http://localhost:4000";
   const navigator = useNavigate();
-  const [isLogin, setIsLogin] = useState(false);
-  const [userInfo, setIsUserInfo] = useState({});
-  const [myCourses, setIsMyCourses] = useState([]);
-  const [courseState, setIsCourseState] = useState({});
+  const [isLogin, setLogin] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
+  const [myCourses, setMyCourses] = useState([]);
+  const [courseState, setCourseState] = useState({});
 
   useEffect(() => {
     const urlA = process.env.REACT_APP_API_URL || "http://localhost:4000";
     const getData = async () => {
       const courseData = await axios.get(
-        `${urlA}/api/v1/courses/${userInfo.id}`
+        `${urlA}/api/v1/me/courses/`
       );
-      setIsMyCourses(courseData.data.courses);
+      setMyCourses(courseData.data.courses);
     };
     if (JSON.parse(localStorage.getItem("userInfo"))) {
-      setIsLogin(true);
-      setIsUserInfo(JSON.parse(localStorage.getItem("userInfo")));
+      setLogin(true);
+      setUserInfo(JSON.parse(localStorage.getItem("userInfo")));
       getData();
     } else {
-      setIsLogin(false);
-      setIsUserInfo({});
+      setLogin(false);
+      setUserInfo({});
     }
-  }, [userInfo.id, setIsMyCourses]);
+  }, [ setMyCourses]);
 
   const logout = async () => {
     try {
       await axios.post(`${url}/api/v1/auth/logout`, null);
-      setIsLogin(false);
+      setLogin(false);
       localStorage.clear();
-      setIsUserInfo({});
-      setIsMyCourses([]);
-      setIsCourseState({});
+      setUserInfo({});
+      setMyCourses([]);
+      setCourseState({});
       alert("로그아웃 되었습니다.");
       navigator(path.main);
     } catch (err) {
       console.log(err);
-      setIsLogin(false);
+      setLogin(false);
       localStorage.clear();
-      setIsUserInfo({});
-      setIsMyCourses([]);
-      setIsCourseState({});
+      setUserInfo({});
+      setMyCourses([]);
+      setCourseState({});
       alert("다시 시도해주세요");
       navigator(path.main);
     }
@@ -133,13 +133,13 @@ function App() {
       <StyledContent>
         <AppRouter
           isLogin={isLogin}
-          setIsLogin={setIsLogin}
+          setLogin={setLogin}
           userInfo={userInfo}
-          setIsUserInfo={setIsUserInfo}
+          setUserInfo={setUserInfo}
           myCourses={myCourses}
-          setIsMyCourses={setIsMyCourses}
+          setMyCourses={setMyCourses}
           courseState={courseState}
-          setIsCourseState={setIsCourseState}
+          setCourseState={setCourseState}
         />
       </StyledContent>
       <Layout.Footer style={{}}>

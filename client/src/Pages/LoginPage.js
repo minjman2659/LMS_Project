@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
-const LoginPage = ({ setIsLogin, setIsUserInfo }) => {
+const LoginPage = ({ setLogin, setUserInfo }) => {
   const navigator = useNavigate();
   const url = process.env.REACT_APP_API_URL || "http://localhost:4000";
 
@@ -21,8 +21,8 @@ const LoginPage = ({ setIsLogin, setIsUserInfo }) => {
         email: loginUser.data.email,
       };
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
-      setIsLogin(true);
-      setIsUserInfo(userInfo);
+      setLogin(true);
+      setUserInfo(userInfo);
       alert("로그인 되었습니다.");
       navigator(-1);
     } catch (err) {
