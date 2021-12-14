@@ -1,7 +1,6 @@
 import { Typography, Card, Button, Row, Col } from "antd";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
 import path from "../lib/path";
 
 const StyledCard = styled(Card)`
@@ -9,8 +8,42 @@ const StyledCard = styled(Card)`
   height: 450px;
 `;
 
-const CourseInfoPage = () => {
+const { IMP } = window;
+IMP.init("imp05951708");
+
+const CourseInfoPage = ({ userInfo, isLogin }) => {
   const navigate = useNavigate();
+
+  const requestPay = (userInfo) => {
+    // IMP.request_pay(param, callback) 결제창 호출
+    IMP.request_pay(
+      {
+        // param
+        pg: "html5_inicis",
+        pay_method: "card",
+        merchant_uid: "ORD20180131-0000011",
+        name: "[풀스택] 유튜브 클론코딩",
+        amount: 50000,
+        buyer_email: userInfo.email,
+        buyer_name: userInfo.username,
+        buyer_tel: "010-4242-4242",
+        buyer_addr: "서울특별시 마포구",
+        buyer_postcode: "01181",
+      },
+      (rsp) => {
+        // callback
+        if (rsp.success) {
+          // 결제 성공 시 로직,
+          navigate(path.courseDetail);
+        } else {
+          // 결제 실패 시 로직,
+          alert("이번만 넘어갑니다.");
+          navigate(path.courseDetail);
+        }
+      }
+    );
+  };
+
   return (
     <>
       <StyledCard
@@ -35,7 +68,9 @@ const CourseInfoPage = () => {
         <Col span={12}>
           <Button
             style={{ width: "100%" }}
-            onClick={() => navigate(path.courseDetail)}
+            onClick={() =>
+              isLogin ? requestPay(userInfo) : navigate(path.login)
+            }
           >
             결제하기
           </Button>

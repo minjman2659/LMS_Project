@@ -155,7 +155,10 @@ const RegistrationForm = () => {
         {...tailFormItemLayout}
       >
         <Checkbox>
-          I have read the <a href="">agreement</a>
+          I have read the &nbsp;
+          <a target="_blank" rel="noreferrer" href="https://bit.ly/3DMCRbe">
+            agreement
+          </a>
         </Checkbox>
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>

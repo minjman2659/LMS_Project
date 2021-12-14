@@ -31,11 +31,15 @@ function App() {
   const url = process.env.REACT_APP_API_URL || "http://localhost:4000";
   const navigator = useNavigate();
   const [isLogin, setIsLogin] = useState(false);
+  const [userInfo, setIsUserInfo] = useState({});
+
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("userInfo"))) {
       setIsLogin(true);
+      setIsUserInfo(JSON.parse(localStorage.getItem("userInfo")));
     } else {
       setIsLogin(false);
+      setIsUserInfo({});
     }
   }, []);
 
@@ -91,7 +95,7 @@ function App() {
         </Row>
       </StyledHeader>
       <StyledContent>
-        <AppRouter isLogin={isLogin} setIsLogin={setIsLogin} />
+        <AppRouter isLogin={isLogin} setIsLogin={setIsLogin} userInfo={userInfo} setIsUserInfo={setIsUserInfo} />
       </StyledContent>
       <Layout.Footer style={{}}>
         <Row justify="space-between">

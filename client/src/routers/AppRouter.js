@@ -9,21 +9,35 @@ import LectureDetailPageImage from "../Pages/LectureDetailPage_Image";
 import LoginPage from "../Pages/LoginPage";
 import RegisterPage from "../Pages/RegisterPage";
 
-const AppRouter = ({ isLogin, setIsLogin }) => {
+const AppRouter = ({ isLogin, setIsLogin, userInfo, setIsUserInfo }) => {
   // const isLoggedIn = true;
   return (
     <Routes>
       {!isLogin ? (
         <>
           <Route path={path.main} element={<Home />} />
-          <Route path={path.courseInfo} element={<CourseInfoPage />} />
+          <Route
+            path={path.courseInfo}
+            element={<CourseInfoPage userInfo={userInfo} isLogin={isLogin} />}
+          />
           <Route path={path.register} element={<RegisterPage />} />
-          <Route path="/*" element={<LoginPage setIsLogin={setIsLogin} />} />
+          <Route
+            path="/*"
+            element={
+              <LoginPage
+                setIsLogin={setIsLogin}
+                setIsUserInfo={setIsUserInfo}
+              />
+            }
+          />
         </>
       ) : (
         <>
           <Route path={path.main} element={<Home />} />
-          <Route path={path.courseInfo} element={<CourseInfoPage />} />
+          <Route
+            path={path.courseInfo}
+            element={<CourseInfoPage userInfo={userInfo} isLogin={isLogin} />}
+          />
           <Route path={path.courseDetail} element={<CourseDetailPage />} />
           <Route
             path={path.lectureDetail_welcome}
