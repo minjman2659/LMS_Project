@@ -2,6 +2,8 @@ import { Typography, Card, Button, Row, Col } from "antd";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import path from "../lib/path";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 const StyledCard = styled(Card)`
   width: 700px;
@@ -11,10 +13,22 @@ const StyledCard = styled(Card)`
 const { IMP } = window;
 IMP.init("imp05951708");
 
-const CourseInfoPage = ({ userInfo, isLogin }) => {
+const CourseInfoPage = ({
+  userInfo,
+  isLogin,
+  myCourses,
+  setIsMyCourses,
+  courseState,
+}) => {
+  const url = process.env.REACT_APP_API_URL || "http://localhost:4000";
   const navigate = useNavigate();
 
-  const requestPay = (userInfo) => {
+  const check = (courseTitle) => {
+    const filterBy = myCourses.filter((el) => el.title === courseTitle);
+    return filterBy.length === 0;
+  }
+
+  const requestPay = (userInfo, courseState) => {
     // IMP.request_pay(param, callback) 결제창 호출
     IMP.request_pay(
       {
@@ -22,7 +36,7 @@ const CourseInfoPage = ({ userInfo, isLogin }) => {
         pg: "html5_inicis",
         pay_method: "card",
         merchant_uid: "ORD20180131-0000011",
-        name: "[풀스택] 유튜브 클론코딩",
+        name: courseState.title,
         amount: 50000,
         buyer_email: userInfo.email,
         buyer_name: userInfo.username,
@@ -30,15 +44,32 @@ const CourseInfoPage = ({ userInfo, isLogin }) => {
         buyer_addr: "서울특별시 마포구",
         buyer_postcode: "01181",
       },
-      (rsp) => {
+      async (rsp) => {
         // callback
+        const copied = myCourses.slice();
+        copied.push(courseState);
+        setIsMyCourses(copied);
         if (rsp.success) {
           // 결제 성공 시 로직,
-          navigate(path.courseDetail);
+          alert("결제 완료했습니다. 마이 페이지로 이동합니다.");
+          await axios.post(`${url}/api/v1/courses/`, {
+            title: courseState.title,
+            description: courseState.description,
+            imageUrl: courseState.imageUrl,
+            courseInfoUrl: courseState.courseInfoUrl,
+          });
+          navigate(path.myCourses);
         } else {
           // 결제 실패 시 로직,
           alert("이번만 넘어갑니다.");
-          navigate(path.courseDetail);
+          alert("마이페이지로 이동합니다.");
+          await axios.post(`${url}/api/v1/courses`, {
+            title: courseState.title,
+            description: courseState.description,
+            imageUrl: courseState.imageUrl,
+            courseInfoUrl: courseState.courseInfoUrl,
+          });
+          navigate(path.myCourses);
         }
       }
     );
@@ -48,17 +79,11 @@ const CourseInfoPage = ({ userInfo, isLogin }) => {
     <>
       <StyledCard
         hoverable
-        cover={
-          <img
-            height="350"
-            alt="card"
-            src="https://media.discordapp.net/attachments/885202056355397686/919804133513506886/unknown.png?width=1920&height=878"
-          />
-        }
+        cover={<img height="350" alt="card" src={courseState.courseInfoUrl} />}
       >
         <Card.Meta
-          title="[풀스택] 유튜브 클론코딩"
-          description="프론트와 백엔드, 그리고 배포까지! 모든 과정을 한 강의에 담았다."
+          title={courseState.title}
+          description={courseState.description}
         />
       </StyledCard>
       <Row gutter={16} justify="center" style={{ marginTop: 20 }}>
@@ -69,7 +94,8 @@ const CourseInfoPage = ({ userInfo, isLogin }) => {
           <Button
             style={{ width: "100%" }}
             onClick={() =>
-              isLogin ? requestPay(userInfo) : navigate(path.login)
+              !check(courseState.title) ? alert("이미 결제한 강의입니다.") :
+              isLogin ? requestPay(userInfo, courseState) : navigate(path.login)
             }
           >
             결제하기

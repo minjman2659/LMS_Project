@@ -50,12 +50,12 @@ const User = db.define(
   },
 );
 
-// User.associate = models => {
-//   User.hasMany(models.post, {
-//     foreignKey: 'fkUserId',
-//     as: 'posts',
-//   });
-// };
+User.associate = models => {
+  User.hasMany(models.course, {
+    foreignKey: 'fkUserId',
+    as: 'courses',
+  });
+};
 
 // classMethods
 User.register = async function register({

@@ -10,11 +10,11 @@ const Container = styled.div`
 `;
 
 const StyledCard = styled(Card)`
-  max-height: 200px;
-  max-width: 320px;
+  max-height: 300px;
+  max-width: 520px;
 `;
 
-const CourseDetailPage = () => {
+const CourseDetailPage = ({ courseState }) => {
   const navigate = useNavigate();
   return (
     <Container>
@@ -22,16 +22,11 @@ const CourseDetailPage = () => {
         <Col span={8}>
           <StyledCard
             hoverable
-            cover={
-              <img
-                alt="card"
-                src="https://media.discordapp.net/attachments/885202056355397686/918710553852141628/image.png?width=1664&height=936"
-              />
-            }
+            cover={<img alt="card" src={courseState.imageUrl} />}
           >
             <Card.Meta
-              title="[풀스택] 유튜브 클론코딩"
-              description="프론트와 백엔드, 그리고 배포까지!"
+              title={courseState.title}
+              description={courseState.description}
             />
           </StyledCard>
         </Col>

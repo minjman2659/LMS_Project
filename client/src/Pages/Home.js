@@ -14,7 +14,7 @@ const StyledCard = styled(Card)`
   max-width: 520px;
 `;
 
-const Home = () => {
+const Home = ({ setIsCourseState }) => {
   const navigator = useNavigate();
 
   return (
@@ -30,7 +30,10 @@ const Home = () => {
                   hoverable
                   style={{ width: 440 }}
                   cover={<img alt={course.alt} src={course.imageUrl} />}
-                  onClick={() => navigator(path.courseInfo)}
+                  onClick={() => {
+                    setIsCourseState(course);
+                    navigator(path.courseInfo);
+                  }}
                 >
                   <Meta title={course.title} description={course.description} />
                 </StyledCard>
@@ -47,7 +50,10 @@ const Home = () => {
                   hoverable
                   style={{ width: 440 }}
                   cover={<img alt={course.alt} src={course.imageUrl} />}
-                  onClick={() => navigator(path.courseInfo)}
+                  onClick={() => {
+                    setIsCourseState(course);
+                    navigator(path.courseInfo);
+                  }}
                 >
                   <Meta title={course.title} description={course.description} />
                 </StyledCard>
@@ -64,7 +70,10 @@ const Home = () => {
                   hoverable
                   style={{ width: 440 }}
                   cover={<img alt={course.alt} src={course.imageUrl} />}
-                  onClick={() => navigator(path.courseInfo)}
+                  onClick={() => {
+                    setIsCourseState(course);
+                    navigator(path.courseInfo);
+                  }}
                 >
                   <Meta title={course.title} description={course.description} />
                 </StyledCard>

@@ -3,12 +3,8 @@ require('../../env');
 const path = require('path');
 const fs = require('fs');
 
-const {
-  POSTGRES_HOST,
-  POSTGRES_DATABASE,
-  POSTGRES_USER,
-  POSTGRES_PW,
-} = process.env;
+const { POSTGRES_HOST, POSTGRES_DATABASE, POSTGRES_USER, POSTGRES_PW } =
+  process.env;
 
 const dbInfo = {
   username: POSTGRES_USER,

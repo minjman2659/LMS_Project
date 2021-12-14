@@ -8,17 +8,38 @@ import LectureDetailPageMovie from "../Pages/LectureDetailPage_Movie";
 import LectureDetailPageImage from "../Pages/LectureDetailPage_Image";
 import LoginPage from "../Pages/LoginPage";
 import RegisterPage from "../Pages/RegisterPage";
+import MyCoursePage from "../Pages/MyCoursePage";
 
-const AppRouter = ({ isLogin, setIsLogin, userInfo, setIsUserInfo }) => {
+const AppRouter = ({
+  isLogin,
+  setIsLogin,
+  userInfo,
+  setIsUserInfo,
+  myCourses,
+  setIsMyCourses,
+  courseState,
+  setIsCourseState,
+}) => {
   // const isLoggedIn = true;
   return (
     <Routes>
       {!isLogin ? (
         <>
-          <Route path={path.main} element={<Home />} />
+          <Route
+            path={path.main}
+            element={<Home setIsCourseState={setIsCourseState} />}
+          />
           <Route
             path={path.courseInfo}
-            element={<CourseInfoPage userInfo={userInfo} isLogin={isLogin} />}
+            element={
+              <CourseInfoPage
+                userInfo={userInfo}
+                isLogin={isLogin}
+                myCourses={myCourses}
+                setIsMyCourses={setIsMyCourses}
+                courseState={courseState}
+              />
+            }
           />
           <Route path={path.register} element={<RegisterPage />} />
           <Route
@@ -33,12 +54,37 @@ const AppRouter = ({ isLogin, setIsLogin, userInfo, setIsUserInfo }) => {
         </>
       ) : (
         <>
-          <Route path={path.main} element={<Home />} />
+          <Route
+            path={path.main}
+            element={<Home setIsCourseState={setIsCourseState} />}
+          />
           <Route
             path={path.courseInfo}
-            element={<CourseInfoPage userInfo={userInfo} isLogin={isLogin} />}
+            element={
+              <CourseInfoPage
+                userInfo={userInfo}
+                isLogin={isLogin}
+                myCourses={myCourses}
+                setIsMyCourses={setIsMyCourses}
+                courseState={courseState}
+              />
+            }
           />
-          <Route path={path.courseDetail} element={<CourseDetailPage />} />
+          <Route
+            path={path.myCourses}
+            element={
+              <MyCoursePage
+                myCourses={myCourses}
+                setIsMyCourses={setIsMyCourses}
+                setIsCourseState={setIsCourseState}
+                userInfo={userInfo}
+              />
+            }
+          />
+          <Route
+            path={path.courseDetail}
+            element={<CourseDetailPage courseState={courseState} />}
+          />
           <Route
             path={path.lectureDetail_welcome}
             element={<LectureDetailPageWelcome />}

@@ -1,0 +1,60 @@
+const Joi = require('joi');
+
+const { validateSchema } = require('lib/utils');
+const { Course } = require('database/models');
+
+exports.create = async (req, res, next) => {
+  const schema = Joi.object().keys({
+    title: Joi.string().min(2).max(20).required(),
+    description: Joi.string().max(2000).required(),
+    imageUrl: Joi.string().required(),
+    courseInfoUrl: Joi.string().required(),
+  });
+
+  if (!validateSchema(res, schema, req.body)) return;
+
+  const { title, description, imageUrl, courseInfoUrl } = req.body;
+
+  const { id: userId } = req.user;
+
+  try {
+    await Course.create({
+      title,
+      description,
+      imageUrl,
+      courseInfoUrl,
+      fkUserId: userId,
+    });
+  } catch (err) {
+    next(err);
+    return;
+  }
+
+  res.sendStatus(201);
+};
+
+exports.list = async (req, res, next) => {
+  const { userId } = req.params;
+
+  if (!Number(userId)) {
+    res.status(400).send('Bad request');
+    return;
+  }
+
+  try {
+    const { rows, count } = await Course.findAndCountAll({
+      where: { fkUserId: userId },
+      order: [['id', 'DESC']],
+      attributes: { exclude: ['fkUserId'] },
+    });
+
+    const result = {
+      courses: rows,
+      count,
+    };
+
+    res.send(result);
+  } catch (err) {
+    next(err);
+  }
+};
