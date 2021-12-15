@@ -49,15 +49,16 @@ const CourseDetailPage = ({ courseState }) => {
                   Watch now -&gt;
                 </Typography.Text>
               </Row>
+            </Panel>
+            <Panel style={{ fontWeight: "bold" }} header="1. SET UP" key="2">
               <Row
                 justify="space-between"
                 style={{
                   padding: "0 8px",
                   fontWeight: "normal",
-                  marginTop: "5px",
                 }}
               >
-                <Typography.Text>#0.1 동영상 예시</Typography.Text>
+                <Typography.Text>#1.0 동영상 예시</Typography.Text>
                 <Typography.Text
                   style={{ cursor: "pointer" }}
                   onClick={() => navigate(path.lectureDetail_movie)}
@@ -65,13 +66,15 @@ const CourseDetailPage = ({ courseState }) => {
                   Watch now -&gt;
                 </Typography.Text>
               </Row>
-            </Panel>
-            <Panel style={{ fontWeight: "bold" }} header="1. SET UP" key="2">
               <Row
                 justify="space-between"
-                style={{ padding: "0 8px", fontWeight: "normal" }}
+                style={{
+                  padding: "0 8px",
+                  fontWeight: "normal",
+                  marginTop: "8px",
+                }}
               >
-                <Typography.Text>#1.0 이미지 예시</Typography.Text>
+                <Typography.Text>#1.1 이미지 예시</Typography.Text>
                 <Typography.Text
                   style={{ cursor: "pointer" }}
                   onClick={() => navigate(path.lectureDetail_image)}

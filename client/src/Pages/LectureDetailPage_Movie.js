@@ -37,32 +37,35 @@ const LectureDetailPageMovie = () => {
                   #0.0 Welcome!
                 </Typography.Text>
               </Row>
+            </Panel>
+            <Panel style={{ fontWeight: "bold" }} header="1. SET UP" key="2">
               <Row
                 justify="space-between"
                 style={{
                   padding: "0 8px",
                   fontWeight: "normal",
-                  marginTop: "5px",
                 }}
               >
                 <Typography.Text
                   style={{ cursor: "pointer" }}
                   onClick={() => navigate(path.lectureDetail_movie)}
                 >
-                  #0.1 동영상 예시
+                  #1.0 동영상 예시
                 </Typography.Text>
               </Row>
-            </Panel>
-            <Panel style={{ fontWeight: "bold" }} header="1. SET UP" key="2">
               <Row
                 justify="space-between"
-                style={{ padding: "0 8px", fontWeight: "normal" }}
+                style={{
+                  padding: "0 8px",
+                  fontWeight: "normal",
+                  marginTop: "6px",
+                }}
               >
                 <Typography.Text
                   style={{ cursor: "pointer" }}
                   onClick={() => navigate(path.lectureDetail_image)}
                 >
-                  #1.0 이미지 예시
+                  #1.1 이미지 예시
                 </Typography.Text>
               </Row>
             </Panel>
@@ -70,7 +73,7 @@ const LectureDetailPageMovie = () => {
         </Col>
         <Col span={16}>
           <Typography.Title style={{ textAlign: "left" }}>
-            #0.1 동영상 예시
+            #1.0 동영상 예시
           </Typography.Title>
           <Card hoverable cover={<img height="250" alt="card" src="" />}>
             <Card.Meta title="카드" description="설명" />

@@ -1,4 +1,4 @@
-import { Row, Col, Typography, Card } from "antd";
+import { Row, Col, Typography, Card, Empty } from "antd";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Meta from "antd/lib/card/Meta";
@@ -17,9 +17,9 @@ const MyCoursePage = ({ myCourses, setCourseState }) => {
     <>
       <Typography.Title>My Courses</Typography.Title>
       {myCourses.length === 0 ? (
-        <h1 style={{ marginTop: 150, color: "gray" }}>Empty</h1>
+        <Empty style={{ marginTop: 150 }} />
       ) : (
-        <Row style={{ marginTop: 30 }} gutter={24}>
+        <Row style={{ marginTop: 60 }} gutter={24}>
           {myCourses.map((course, index) => (
             <Col key={index}>
               <StyledCard

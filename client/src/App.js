@@ -15,7 +15,7 @@ import axios from "axios";
 axios.defaults.withCredentials = true;
 
 const StyledLayout = styled(Layout)`
-  height: 100vh;
+  min-height: 100vh;
   background-color: #fff;
 `;
 const StyledHeader = styled(Layout.Header)`
