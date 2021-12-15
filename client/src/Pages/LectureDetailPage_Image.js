@@ -1,7 +1,8 @@
-import { Card, Collapse, Col, Row, Typography } from "antd";
+import { Card, Collapse, Col, Row, Typography, Button } from "antd";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import path from "../lib/path";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 
 const { Panel } = Collapse;
 
@@ -9,17 +10,42 @@ const Container = styled.div`
   width: 1080px;
 `;
 
-// const StyledCard = styled(Card)`
-//   max-height: 200px;
-//   max-width: 320px;
-// `;
+const StyledCard = styled(Card)`
+  min-height: 240px;
+  min-width: 320px;
+`;
 
-const LectureDetailPageImage = () => {
+const LectureDetailPageImage = ({
+  welcomeState,
+  movieState,
+  imageState,
+  setImageState,
+}) => {
   const navigate = useNavigate();
+
+  const onChange = (e) => {
+    if (e.target.checked) {
+      setImageState(true);
+      localStorage.setItem("imageState", "true");
+    } else {
+      setImageState(null);
+      localStorage.removeItem("imageState");
+    }
+  };
+
   return (
     <Container>
       <Row gutter={32}>
         <Col span={8}>
+          <Button
+            type="primary"
+            block
+            style={{ marginBottom: 10 }}
+            onClick={() => navigate(path.courseDetail)}
+          >
+            <ArrowLeftOutlined />
+            &nbsp;Back to the Course List
+          </Button>
           <Collapse defaultActiveKey={["1", "2", "3"]}>
             <Panel
               header="0. INTRODUCTION"
@@ -36,6 +62,12 @@ const LectureDetailPageImage = () => {
                 >
                   #0.0 Welcome!
                 </Typography.Text>
+                <input
+                  type="checkbox"
+                  style={{ marginTop: 5 }}
+                  checked={welcomeState ? "checked" : ""}
+                  disabled
+                />
               </Row>
             </Panel>
             <Panel style={{ fontWeight: "bold" }} header="1. SET UP" key="2">
@@ -52,6 +84,12 @@ const LectureDetailPageImage = () => {
                 >
                   #1.0 동영상 예시
                 </Typography.Text>
+                <input
+                  type="checkbox"
+                  style={{ marginTop: 5 }}
+                  checked={movieState ? "checked" : ""}
+                  disabled
+                />
               </Row>
               <Row
                 justify="space-between"
@@ -67,6 +105,12 @@ const LectureDetailPageImage = () => {
                 >
                   #1.1 이미지 예시
                 </Typography.Text>
+                <input
+                  type="checkbox"
+                  style={{ marginTop: 5 }}
+                  checked={imageState ? "checked" : ""}
+                  onChange={onChange}
+                />
               </Row>
             </Panel>
           </Collapse>
@@ -75,9 +119,9 @@ const LectureDetailPageImage = () => {
           <Typography.Title style={{ textAlign: "left" }}>
             #1.1 이미지 예시
           </Typography.Title>
-          <Card hoverable cover={<img height="250" alt="card" src="" />}>
+          <StyledCard hoverable cover={<img alt="card" src="" />}>
             <Card.Meta title="카드" description="설명" />
-          </Card>
+          </StyledCard>
         </Col>
       </Row>
     </Container>

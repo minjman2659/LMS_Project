@@ -34,6 +34,9 @@ function App() {
   const [userInfo, setUserInfo] = useState({});
   const [myCourses, setMyCourses] = useState([]);
   const [courseState, setCourseState] = useState({});
+  const [welcomeState, setWelcomeState] = useState(null);
+  const [movieState, setMovieState] = useState(null);
+  const [imageState, setImageState] = useState(null);
 
   useEffect(() => {
     const urlA = process.env.REACT_APP_API_URL || "http://localhost:4000";
@@ -42,6 +45,9 @@ function App() {
       setMyCourses(courseData.data.courses);
     };
     setCourseState(JSON.parse(localStorage.getItem("course")));
+    setWelcomeState(localStorage.getItem("welcomeState"));
+    setMovieState(localStorage.getItem("movieState"));
+    setImageState(localStorage.getItem("imageState"));
     if (localStorage.getItem("userInfo")) {
       setLogin(true);
       setUserInfo(JSON.parse(localStorage.getItem("userInfo")));
@@ -54,7 +60,7 @@ function App() {
   const logout = async () => {
     try {
       await axios.post(`${url}/api/v1/auth/logout`, null);
-      localStorage.clear();
+      localStorage.removeItem("userInfo");
       setUserInfo({});
       setLogin(false);
       setMyCourses([]);
@@ -63,7 +69,7 @@ function App() {
       navigator(path.main);
     } catch (err) {
       console.log(err);
-      localStorage.clear();
+      localStorage.removeItem("userInfo");
       setUserInfo({});
       setLogin(false);
       setMyCourses([]);
@@ -138,6 +144,12 @@ function App() {
           setMyCourses={setMyCourses}
           courseState={courseState}
           setCourseState={setCourseState}
+          welcomeState={welcomeState}
+          setWelcomeState={setWelcomeState}
+          movieState={movieState}
+          setMovieState={setMovieState}
+          imageState={imageState}
+          setImageState={setImageState}
         />
       </StyledContent>
       <Layout.Footer style={{}}>

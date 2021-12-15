@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const { validateSchema } = require('lib/utils');
-const { Course } = require('database/models');
+const { MyCourse } = require('database/models');
 
 exports.add = async (req, res, next) => {
   const schema = Joi.object().keys({
@@ -19,7 +19,7 @@ exports.add = async (req, res, next) => {
   const { id: userId } = req.user;
 
   try {
-    await Course.create({
+    await MyCourse.create({
       courseId,
       title,
       description,
@@ -44,7 +44,7 @@ exports.list = async (req, res, next) => {
   }
 
   try {
-    const { rows, count } = await Course.findAndCountAll({
+    const { rows, count } = await MyCourse.findAndCountAll({
       where: { fkUserId: userId },
       order: [['id', 'DESC']],
       attributes: { exclude: ['fkUserId'] },

@@ -19,6 +19,12 @@ const AppRouter = ({
   setMyCourses,
   courseState,
   setCourseState,
+  welcomeState,
+  setWelcomeState,
+  movieState,
+  setMovieState,
+  imageState,
+  setImageState,
 }) => {
   // const isLoggedIn = true;
   return (
@@ -78,19 +84,47 @@ const AppRouter = ({
           />
           <Route
             path={path.courseDetail}
-            element={<CourseDetailPage courseState={courseState} />}
+            element={
+              <CourseDetailPage
+                courseState={courseState}
+                welcomeState={welcomeState}
+                movieState={movieState}
+                imageState={imageState}
+              />
+            }
           />
           <Route
             path={path.lectureDetail_welcome}
-            element={<LectureDetailPageWelcome />}
+            element={
+              <LectureDetailPageWelcome
+                setWelcomeState={setWelcomeState}
+                welcomeState={welcomeState}
+                movieState={movieState}
+                imageState={imageState}
+              />
+            }
           />
           <Route
             path={path.lectureDetail_movie}
-            element={<LectureDetailPageMovie />}
+            element={
+              <LectureDetailPageMovie
+                welcomeState={welcomeState}
+                setMovieState={setMovieState}
+                movieState={movieState}
+                imageState={imageState}
+              />
+            }
           />
           <Route
             path={path.lectureDetail_image}
-            element={<LectureDetailPageImage />}
+            element={
+              <LectureDetailPageImage
+                welcomeState={welcomeState}
+                movieState={movieState}
+                setImageState={setImageState}
+                imageState={imageState}
+              />
+            }
           />
           <Route path={path.register} element={<RegisterPage />} />
         </>

@@ -1,7 +1,9 @@
-import { Card, Collapse, Col, Row, Typography, Checkbox } from "antd";
+import { Card, Collapse, Col, Row, Typography, Button } from "antd";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import path from "../lib/path";
+import { useEffect, useRef } from "react";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 
 const { Panel } = Collapse;
 const { Paragraph, Text } = Typography;
@@ -10,17 +12,64 @@ const Container = styled.div`
   width: 1080px;
 `;
 
-const LectureDetailPageWelcome = () => {
+const LectureDetailPageWelcome = ({
+  setWelcomeState,
+  welcomeState,
+  movieState,
+  imageState,
+}) => {
   const navigate = useNavigate();
+  const ref = useRef(null);
 
-  function onChange(e) {
-    console.log(`checked = ${e.target.checked}`);
-  }
+  useEffect(() => {
+    // scroll event listener 등록
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      // scroll event listener 해제
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  const onChange = (e) => {
+    if (e.target.checked) {
+      setWelcomeState(true);
+      localStorage.setItem("welcomeState", "true");
+    } else {
+      setWelcomeState(null);
+      localStorage.removeItem("welcomeState");
+    }
+  };
+
+  const handleScroll = (e) => {
+    const scrollHeight = document.documentElement.scrollHeight;
+    const scrollTop = document.documentElement.scrollTop;
+    const clientHeight = document.documentElement.clientHeight;
+
+    if (
+      scrollTop + clientHeight >= scrollHeight - 150 &&
+      !ref.current.checked
+    ) {
+      // 페이지 끝에 도달
+      console.log("도달");
+      ref.current.checked = true;
+      setWelcomeState(true);
+      localStorage.setItem("welcomeState", "true");
+    }
+  };
 
   return (
     <Container>
       <Row gutter={32}>
         <Col span={8}>
+          <Button
+            type="primary"
+            block
+            style={{ marginBottom: 10 }}
+            onClick={() => navigate(path.courseDetail)}
+          >
+            <ArrowLeftOutlined />
+            &nbsp;Back to the Course List
+          </Button>
           <Collapse defaultActiveKey={["1", "2", "3"]}>
             <Panel
               header="0. INTRODUCTION"
@@ -37,7 +86,13 @@ const LectureDetailPageWelcome = () => {
                 >
                   #0.0 Welcome!
                 </Typography.Text>
-                <Checkbox onChange={onChange} />
+                <input
+                  ref={ref}
+                  type="checkbox"
+                  style={{ marginTop: 5 }}
+                  checked={welcomeState ? "checked" : ""}
+                  onChange={onChange}
+                />
               </Row>
             </Panel>
             <Panel style={{ fontWeight: "bold" }} header="1. SET UP" key="2">
@@ -54,6 +109,12 @@ const LectureDetailPageWelcome = () => {
                 >
                   #1.0 동영상 예시
                 </Typography.Text>
+                <input
+                  type="checkbox"
+                  style={{ marginTop: 5 }}
+                  checked={movieState ? "checked" : ""}
+                  disabled
+                />
               </Row>
               <Row
                 justify="space-between"
@@ -69,6 +130,12 @@ const LectureDetailPageWelcome = () => {
                 >
                   #1.1 이미지 예시
                 </Typography.Text>
+                <input
+                  type="checkbox"
+                  style={{ marginTop: 5 }}
+                  checked={imageState ? "checked" : ""}
+                  disabled
+                />
               </Row>
             </Panel>
           </Collapse>

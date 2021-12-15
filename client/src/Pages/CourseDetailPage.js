@@ -2,6 +2,7 @@ import { Card, Collapse, Col, Row, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import path from "../lib/path";
+import { CheckOutlined } from "@ant-design/icons";
 
 const { Panel } = Collapse;
 
@@ -14,7 +15,12 @@ const StyledCard = styled(Card)`
   max-width: 520px;
 `;
 
-const CourseDetailPage = ({ courseState }) => {
+const CourseDetailPage = ({
+  courseState,
+  welcomeState,
+  movieState,
+  imageState,
+}) => {
   const navigate = useNavigate();
   return (
     <Container>
@@ -39,9 +45,18 @@ const CourseDetailPage = ({ courseState }) => {
             >
               <Row
                 justify="space-between"
-                style={{ padding: "0 8px", fontWeight: "normal" }}
+                style={{
+                  padding: "0 8px",
+                  fontWeight: "normal",
+                }}
               >
-                <Typography.Text>#0.0 Welcome!</Typography.Text>
+                {welcomeState ? (
+                  <Typography.Text>
+                    #0.0 Welcome! &nbsp;&nbsp;&nbsp; <CheckOutlined />
+                  </Typography.Text>
+                ) : (
+                  <Typography.Text>#0.0 Welcome!</Typography.Text>
+                )}
                 <Typography.Text
                   style={{ cursor: "pointer" }}
                   onClick={() => navigate(path.lectureDetail_welcome)}
@@ -58,7 +73,13 @@ const CourseDetailPage = ({ courseState }) => {
                   fontWeight: "normal",
                 }}
               >
-                <Typography.Text>#1.0 동영상 예시</Typography.Text>
+                {movieState ? (
+                  <Typography.Text>
+                    #1.0 동영상 예시 &nbsp;&nbsp;&nbsp; <CheckOutlined />
+                  </Typography.Text>
+                ) : (
+                  <Typography.Text>#1.0 동영상 예시</Typography.Text>
+                )}
                 <Typography.Text
                   style={{ cursor: "pointer" }}
                   onClick={() => navigate(path.lectureDetail_movie)}
@@ -74,7 +95,14 @@ const CourseDetailPage = ({ courseState }) => {
                   marginTop: "8px",
                 }}
               >
-                <Typography.Text>#1.1 이미지 예시</Typography.Text>
+                {imageState ? (
+                  <Typography.Text>
+                    #1.1 이미지 예시 &nbsp;&nbsp;&nbsp; <CheckOutlined />
+                  </Typography.Text>
+                ) : (
+                  <Typography.Text>#1.1 이미지 예시</Typography.Text>
+                )}
+
                 <Typography.Text
                   style={{ cursor: "pointer" }}
                   onClick={() => navigate(path.lectureDetail_image)}

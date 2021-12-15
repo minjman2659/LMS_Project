@@ -1,7 +1,8 @@
-import { Card, Collapse, Col, Row, Typography } from "antd";
+import { Card, Collapse, Col, Row, Typography, Button } from "antd";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import path from "../lib/path";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 
 const { Panel } = Collapse;
 
@@ -14,12 +15,37 @@ const Container = styled.div`
 //   max-width: 320px;
 // `;
 
-const LectureDetailPageMovie = () => {
+const LectureDetailPageMovie = ({
+  welcomeState,
+  movieState,
+  setMovieState,
+  imageState,
+}) => {
   const navigate = useNavigate();
+
+  const onChange = (e) => {
+    if (e.target.checked) {
+      setMovieState(true);
+      localStorage.setItem("movieState", "true");
+    } else {
+      setMovieState(null);
+      localStorage.removeItem("movieState");
+    }
+  };
+
   return (
     <Container>
       <Row gutter={32}>
         <Col span={8}>
+          <Button
+            type="primary"
+            block
+            style={{ marginBottom: 10 }}
+            onClick={() => navigate(path.courseDetail)}
+          >
+            <ArrowLeftOutlined />
+            &nbsp;Back to the Course List
+          </Button>
           <Collapse defaultActiveKey={["1", "2", "3"]}>
             <Panel
               header="0. INTRODUCTION"
@@ -36,6 +62,12 @@ const LectureDetailPageMovie = () => {
                 >
                   #0.0 Welcome!
                 </Typography.Text>
+                <input
+                  type="checkbox"
+                  style={{ marginTop: 5 }}
+                  checked={welcomeState ? "checked" : ""}
+                  disabled
+                />
               </Row>
             </Panel>
             <Panel style={{ fontWeight: "bold" }} header="1. SET UP" key="2">
@@ -52,6 +84,12 @@ const LectureDetailPageMovie = () => {
                 >
                   #1.0 동영상 예시
                 </Typography.Text>
+                <input
+                  type="checkbox"
+                  style={{ marginTop: 5 }}
+                  checked={movieState ? "checked" : ""}
+                  onChange={onChange}
+                />
               </Row>
               <Row
                 justify="space-between"
@@ -67,6 +105,12 @@ const LectureDetailPageMovie = () => {
                 >
                   #1.1 이미지 예시
                 </Typography.Text>
+                <input
+                  type="checkbox"
+                  style={{ marginTop: 5 }}
+                  checked={imageState ? "checked" : ""}
+                  disabled
+                />
               </Row>
             </Panel>
           </Collapse>

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Meta from "antd/lib/card/Meta";
 import "antd/dist/antd.css";
 import path from "../lib/path";
-import { best, development, design } from "../mock/courses";
+import { best, development, design } from "../mock/Course";
 
 const { TabPane } = Tabs;
 const { Title } = Typography;

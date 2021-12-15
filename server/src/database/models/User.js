@@ -51,9 +51,9 @@ const User = db.define(
 );
 
 User.associate = models => {
-  User.hasMany(models.course, {
+  User.hasMany(models.my_course, {
     foreignKey: 'fkUserId',
-    as: 'courses',
+    as: 'my_courses',
   });
 };
 

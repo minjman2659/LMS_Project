@@ -1,15 +1,15 @@
 const Sequelize = require('sequelize');
 const db = require('database/db');
 
-const Course = db.define(
-  'course',
+const MyCourse = db.define(
+  'my_course',
   {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    courseId: { type: Sequelize.INTEGER, field: 'course_id' },
+    courseId: { type: Sequelize.INTEGER, field: 'course_id' }, // Course Table의 외래키
     title: Sequelize.STRING(100),
     description: Sequelize.TEXT,
     imageUrl: { type: Sequelize.STRING, field: 'image_url' },
@@ -27,8 +27,8 @@ const Course = db.define(
   },
 );
 
-Course.associate = models => {
-  Course.belongsTo(models.user, {
+MyCourse.associate = models => {
+  MyCourse.belongsTo(models.user, {
     foreignKey: 'fkUserId',
     as: 'owner',
     onDelete: 'CASCADE',
@@ -36,4 +36,4 @@ Course.associate = models => {
   });
 };
 
-module.exports = Course;
+module.exports = MyCourse;
