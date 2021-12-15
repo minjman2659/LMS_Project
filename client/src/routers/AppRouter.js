@@ -45,10 +45,7 @@ const AppRouter = ({
           <Route
             path="/*"
             element={
-              <LoginPage
-                setLogin={setLogin}
-                setUserInfo={setUserInfo}
-              />
+              <LoginPage setLogin={setLogin} setUserInfo={setUserInfo} />
             }
           />
         </>
@@ -75,9 +72,7 @@ const AppRouter = ({
             element={
               <MyCoursePage
                 myCourses={myCourses}
-                setMyCourses={setMyCourses}
                 setCourseState={setCourseState}
-                userInfo={userInfo}
               />
             }
           />

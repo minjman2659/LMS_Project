@@ -26,7 +26,7 @@ const CourseInfoPage = ({
   const check = (courseId) => {
     const filterBy = myCourses.filter((el) => el.courseId === courseId);
     return filterBy.length === 0;
-  }
+  };
 
   const requestPay = (userInfo, courseState) => {
     // IMP.request_pay(param, callback) 결제창 호출
@@ -47,7 +47,7 @@ const CourseInfoPage = ({
       async (rsp) => {
         // callback
         const copied = myCourses.slice();
-        copied.push(courseState);
+        copied.unshift(courseState);
         setMyCourses(copied);
         if (rsp.success) {
           // 결제 성공 시 로직,
@@ -96,8 +96,11 @@ const CourseInfoPage = ({
           <Button
             style={{ width: "100%" }}
             onClick={() =>
-              !check(courseState.courseId) ? alert("이미 결제한 강의입니다.") :
-              isLogin ? requestPay(userInfo, courseState) : navigate(path.login)
+              !check(courseState.courseId)
+                ? alert("이미 결제한 강의입니다.")
+                : isLogin
+                ? requestPay(userInfo, courseState)
+                : navigate(path.login)
             }
           >
             결제하기

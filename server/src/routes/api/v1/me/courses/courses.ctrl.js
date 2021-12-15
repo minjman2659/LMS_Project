@@ -5,7 +5,7 @@ const { Course } = require('database/models');
 
 exports.add = async (req, res, next) => {
   const schema = Joi.object().keys({
-    courseId: Joi.integer().required(),
+    courseId: Joi.number().required(),
     title: Joi.string().min(2).max(20).required(),
     description: Joi.string().max(2000).required(),
     imageUrl: Joi.string().required(),

@@ -28,6 +28,8 @@ const MyCoursePage = ({ myCourses, setCourseState }) => {
                 cover={<img alt={course.alt} src={course.imageUrl} />}
                 onClick={() => {
                   setCourseState(course);
+                  localStorage.removeItem("course");
+                  localStorage.setItem("course", JSON.stringify(course));
                   navigator(path.courseDetail);
                 }}
               >

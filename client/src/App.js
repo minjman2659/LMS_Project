@@ -38,36 +38,34 @@ function App() {
   useEffect(() => {
     const urlA = process.env.REACT_APP_API_URL || "http://localhost:4000";
     const getData = async () => {
-      const courseData = await axios.get(
-        `${urlA}/api/v1/me/courses/`
-      );
+      const courseData = await axios.get(`${urlA}/api/v1/me/courses/`);
       setMyCourses(courseData.data.courses);
     };
-    if (JSON.parse(localStorage.getItem("userInfo"))) {
+    setCourseState(JSON.parse(localStorage.getItem("course")));
+    if (localStorage.getItem("userInfo")) {
       setLogin(true);
       setUserInfo(JSON.parse(localStorage.getItem("userInfo")));
       getData();
     } else {
       setLogin(false);
-      setUserInfo({});
     }
-  }, [ setMyCourses]);
+  }, [setMyCourses, isLogin]);
 
   const logout = async () => {
     try {
       await axios.post(`${url}/api/v1/auth/logout`, null);
-      setLogin(false);
       localStorage.clear();
       setUserInfo({});
+      setLogin(false);
       setMyCourses([]);
       setCourseState({});
       alert("로그아웃 되었습니다.");
       navigator(path.main);
     } catch (err) {
       console.log(err);
-      setLogin(false);
       localStorage.clear();
       setUserInfo({});
+      setLogin(false);
       setMyCourses([]);
       setCourseState({});
       alert("다시 시도해주세요");
