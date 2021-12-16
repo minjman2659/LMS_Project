@@ -60,7 +60,7 @@ function App() {
   const logout = async () => {
     try {
       await axios.post(`${url}/api/v1/auth/logout`, null);
-      localStorage.removeItem("userInfo");
+      localStorage.clear();
       setUserInfo({});
       setLogin(false);
       setMyCourses([]);
@@ -69,7 +69,7 @@ function App() {
       navigator(path.main);
     } catch (err) {
       console.log(err);
-      localStorage.removeItem("userInfo");
+      localStorage.clear();
       setUserInfo({});
       setLogin(false);
       setMyCourses([]);
