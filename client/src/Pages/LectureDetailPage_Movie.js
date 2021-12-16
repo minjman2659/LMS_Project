@@ -1,19 +1,17 @@
-import { Card, Collapse, Col, Row, Typography, Button } from "antd";
+import { Collapse, Col, Row, Typography, Button } from "antd";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import path from "../lib/path";
 import { ArrowLeftOutlined } from "@ant-design/icons";
+import { useEffect, useState, useRef } from "react";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 const { Panel } = Collapse;
 
 const Container = styled.div`
   width: 1080px;
 `;
-
-// const StyledCard = styled(Card)`
-//   max-height: 200px;
-//   max-width: 320px;
-// `;
 
 const LectureDetailPageMovie = ({
   welcomeState,
@@ -22,6 +20,18 @@ const LectureDetailPageMovie = ({
   imageState,
 }) => {
   const navigate = useNavigate();
+  const [movie, setMovie] = useState();
+  const ref = useRef(null);
+  const isVideoEnd = document.getElementsByClassName("video");
+  isVideoEnd.addEventListener()
+  // setInterval(() => {
+  //   console.log(isVideoEnd);
+  // }, 5000);
+
+  useEffect(() => {
+    const url = process.env.REACT_APP_API_URL || "http://localhost:4000";
+    setMovie(`${url}/movies/course-movie.mp4`);
+  }, []);
 
   const onChange = (e) => {
     if (e.target.checked) {
@@ -85,6 +95,7 @@ const LectureDetailPageMovie = ({
                   #1.0 동영상 예시
                 </Typography.Text>
                 <input
+                  ref={ref}
                   type="checkbox"
                   style={{ marginTop: 5 }}
                   checked={movieState ? "checked" : ""}
@@ -119,9 +130,14 @@ const LectureDetailPageMovie = ({
           <Typography.Title style={{ textAlign: "left" }}>
             #1.0 동영상 예시
           </Typography.Title>
-          <Card hoverable cover={<img height="250" alt="card" src="" />}>
-            <Card.Meta title="카드" description="설명" />
-          </Card>
+          <video
+            className="video"
+            style={{ height: 480, width: 720, marginBottom: 50 }}
+            controls
+            autobuffer="true"
+          >
+            <source src={movie} type="video/mp4"></source>
+          </video>
         </Col>
       </Row>
     </Container>
