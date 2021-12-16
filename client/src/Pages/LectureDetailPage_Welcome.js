@@ -12,6 +12,11 @@ const Container = styled.div`
   width: 1080px;
 `;
 
+const StyledCard = styled(Card)`
+  min-height: 240px;
+  min-width: 320px;
+`;
+
 const LectureDetailPageWelcome = ({
   setWelcomeState,
   welcomeState,
@@ -40,7 +45,7 @@ const LectureDetailPageWelcome = ({
     }
   };
 
-  const handleScroll = (e) => {
+  const handleScroll = () => {
     const scrollHeight = document.documentElement.scrollHeight;
     const scrollTop = document.documentElement.scrollTop;
     const clientHeight = document.documentElement.clientHeight;
@@ -144,11 +149,11 @@ const LectureDetailPageWelcome = ({
           <Typography.Title style={{ textAlign: "left" }}>
             #0.0 Welcome!
           </Typography.Title>
-          <Card
+          <StyledCard
             hoverable
             cover={<img alt="card" src="https://bit.ly/3GJw9oq" />}
             style={{ width: 700, height: 300 }}
-          ></Card>
+          ></StyledCard>
           <Col style={{ textAlign: "left" }}>
             <Paragraph style={{ marginTop: 30 }}>
               In the process of internal desktop applications development, many

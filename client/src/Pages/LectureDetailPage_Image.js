@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import path from "../lib/path";
 import { ArrowLeftOutlined } from "@ant-design/icons";
+import { useEffect, useState, useRef } from "react";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 const { Panel } = Collapse;
 
@@ -22,6 +25,22 @@ const LectureDetailPageImage = ({
   setImageState,
 }) => {
   const navigate = useNavigate();
+  const [image, setImage] = useState("");
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const url = process.env.REACT_APP_API_URL || "http://localhost:4000";
+    setImage(`${url}/images/course-image.jpeg`);
+  }, []);
+
+  useEffect(() => {
+    // scroll event listener 등록
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      // scroll event listener 해제
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
 
   const onChange = (e) => {
     if (e.target.checked) {
@@ -30,6 +49,23 @@ const LectureDetailPageImage = ({
     } else {
       setImageState(null);
       localStorage.removeItem("imageState");
+    }
+  };
+
+  const handleScroll = () => {
+    const scrollHeight = document.documentElement.scrollHeight;
+    const scrollTop = document.documentElement.scrollTop;
+    const clientHeight = document.documentElement.clientHeight;
+
+    if (
+      scrollTop + clientHeight >= scrollHeight - 150 &&
+      !ref.current.checked
+    ) {
+      // 페이지 끝에 도달
+      console.log("도달");
+      ref.current.checked = true;
+      setImageState(true);
+      localStorage.setItem("imageState", "true");
     }
   };
 
@@ -106,6 +142,7 @@ const LectureDetailPageImage = ({
                   #1.1 이미지 예시
                 </Typography.Text>
                 <input
+                  ref={ref}
                   type="checkbox"
                   style={{ marginTop: 5 }}
                   checked={imageState ? "checked" : ""}
@@ -119,7 +156,7 @@ const LectureDetailPageImage = ({
           <Typography.Title style={{ textAlign: "left" }}>
             #1.1 이미지 예시
           </Typography.Title>
-          <StyledCard hoverable cover={<img alt="card" src="" />}>
+          <StyledCard hoverable cover={<img alt="card" src={image} />}>
             <Card.Meta title="카드" description="설명" />
           </StyledCard>
         </Col>
