@@ -135,7 +135,7 @@ const LectureDetailPageImage = ({
                 }}
               >
                 <Typography.Text
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", color: "blue" }}
                   onClick={() => navigate(path.lectureDetail_image)}
                 >
                   #1.1 이미지 예시

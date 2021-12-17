@@ -91,7 +91,7 @@ const LectureDetailPageMovie = ({
                 }}
               >
                 <Typography.Text
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", color: "blue" }}
                   onClick={() => navigate(path.lectureDetail_movie)}
                 >
                   #1.0 동영상 예시

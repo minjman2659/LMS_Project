@@ -138,7 +138,7 @@ const LectureDetailPageWelcome = ({
                 style={{ padding: "0 8px", fontWeight: "normal" }}
               >
                 <Typography.Text
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", color: "blue" }}
                   onClick={() => navigate(path.lectureDetail_rate)}
                 >
                   #2.0 Let us know what you think
