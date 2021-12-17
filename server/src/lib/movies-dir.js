@@ -12,7 +12,10 @@ router.get('*', (req, res) => {
   console.log(range);
 
   if (!range) {
-    const header = { 'Content-Type': 'video/mp4' };
+    const header = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    };
     res.writeHead(200, header);
     res.end();
   } else {
