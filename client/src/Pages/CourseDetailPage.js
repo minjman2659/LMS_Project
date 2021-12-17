@@ -1,8 +1,9 @@
-import { Card, Collapse, Col, Row, Typography } from "antd";
+import { Card, Collapse, Col, Row, Typography, Progress } from "antd";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import path from "../lib/path";
 import { CheckOutlined } from "@ant-design/icons";
+import { useEffect, useState } from "react";
 
 const { Panel } = Collapse;
 
@@ -20,8 +21,22 @@ const CourseDetailPage = ({
   welcomeState,
   movieState,
   imageState,
+  rateState,
 }) => {
   const navigate = useNavigate();
+  const [percent, setPercent] = useState(0);
+
+  useEffect(() => {
+    const arr = [];
+    if (welcomeState) arr.push(true);
+    if (movieState) arr.push(true);
+    if (imageState) arr.push(true);
+    if (rateState) arr.push(true);
+    arr.length === 0
+      ? setPercent(0)
+      : setPercent(parseInt((100 / 4) * arr.length));
+  }, [welcomeState, movieState, imageState, rateState]);
+
   return (
     <Container>
       <Row gutter={32}>
@@ -32,7 +47,13 @@ const CourseDetailPage = ({
           >
             <Card.Meta
               title={courseState.title}
-              description={courseState.description}
+              description={
+                <Progress
+                  percent={percent}
+                  style={{ width: 265 }}
+                  status="active"
+                />
+              }
             />
           </StyledCard>
         </Col>
@@ -106,6 +127,32 @@ const CourseDetailPage = ({
                 <Typography.Text
                   style={{ cursor: "pointer" }}
                   onClick={() => navigate(path.lectureDetail_image)}
+                >
+                  Watch now -&gt;
+                </Typography.Text>
+              </Row>
+            </Panel>
+            <Panel style={{ fontWeight: "bold" }} header="2. THANK YOU" key="3">
+              <Row
+                justify="space-between"
+                style={{
+                  padding: "0 8px",
+                  fontWeight: "normal",
+                }}
+              >
+                {rateState ? (
+                  <Typography.Text>
+                    #2.0 Let us know what you think &nbsp;&nbsp;&nbsp;{" "}
+                    <CheckOutlined />
+                  </Typography.Text>
+                ) : (
+                  <Typography.Text>
+                    #2.0 Let us know what you think
+                  </Typography.Text>
+                )}
+                <Typography.Text
+                  style={{ cursor: "pointer" }}
+                  onClick={() => navigate(path.lectureDetail_rate)}
                 >
                   Watch now -&gt;
                 </Typography.Text>

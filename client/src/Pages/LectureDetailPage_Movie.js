@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 import path from "../lib/path";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useEffect, useState, useRef } from "react";
-import axios from "axios";
-axios.defaults.withCredentials = true;
 
 const { Panel } = Collapse;
 
@@ -18,15 +16,11 @@ const LectureDetailPageMovie = ({
   movieState,
   setMovieState,
   imageState,
+  rateState,
 }) => {
   const navigate = useNavigate();
   const [movie, setMovie] = useState();
   const ref = useRef(null);
-  const isVideoEnd = document.getElementsByClassName("video");
-  isVideoEnd.addEventListener()
-  // setInterval(() => {
-  //   console.log(isVideoEnd);
-  // }, 5000);
 
   useEffect(() => {
     const url = process.env.REACT_APP_API_URL || "http://localhost:4000";
@@ -40,6 +34,14 @@ const LectureDetailPageMovie = ({
     } else {
       setMovieState(null);
       localStorage.removeItem("movieState");
+    }
+  };
+
+  const handleEnded = () => {
+    if (!ref.current.checked) {
+      ref.current.checked = true;
+      setMovieState(true);
+      localStorage.setItem("movieState", "true");
     }
   };
 
@@ -124,6 +126,25 @@ const LectureDetailPageMovie = ({
                 />
               </Row>
             </Panel>
+            <Panel header="2. THANK YOU" key="3" style={{ fontWeight: "bold" }}>
+              <Row
+                justify="space-between"
+                style={{ padding: "0 8px", fontWeight: "normal" }}
+              >
+                <Typography.Text
+                  style={{ cursor: "pointer" }}
+                  onClick={() => navigate(path.lectureDetail_rate)}
+                >
+                  #2.0 Let us know what you think
+                </Typography.Text>
+                <input
+                  type="checkbox"
+                  style={{ marginTop: 5 }}
+                  checked={rateState ? "checked" : ""}
+                  disabled
+                />
+              </Row>
+            </Panel>
           </Collapse>
         </Col>
         <Col span={16}>
@@ -132,9 +153,10 @@ const LectureDetailPageMovie = ({
           </Typography.Title>
           <video
             className="video"
-            style={{ height: 480, width: 720, marginBottom: 50 }}
+            style={{ width: 720, height: 540, marginBottom: 60 }}
             controls
             autobuffer="true"
+            onEnded={handleEnded}
           >
             <source src={movie} type="video/mp4"></source>
           </video>

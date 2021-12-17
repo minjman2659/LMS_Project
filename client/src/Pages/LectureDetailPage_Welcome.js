@@ -22,6 +22,7 @@ const LectureDetailPageWelcome = ({
   welcomeState,
   movieState,
   imageState,
+  rateState,
 }) => {
   const navigate = useNavigate();
   const ref = useRef(null);
@@ -75,7 +76,7 @@ const LectureDetailPageWelcome = ({
             <ArrowLeftOutlined />
             &nbsp;Back to the Course List
           </Button>
-          <Collapse defaultActiveKey={["1", "2", "3"]}>
+          <Collapse defaultActiveKey={["1", "2", "3", "4"]}>
             <Panel
               header="0. INTRODUCTION"
               key="1"
@@ -139,6 +140,25 @@ const LectureDetailPageWelcome = ({
                   type="checkbox"
                   style={{ marginTop: 5 }}
                   checked={imageState ? "checked" : ""}
+                  disabled
+                />
+              </Row>
+            </Panel>
+            <Panel header="2. THANK YOU" key="3" style={{ fontWeight: "bold" }}>
+              <Row
+                justify="space-between"
+                style={{ padding: "0 8px", fontWeight: "normal" }}
+              >
+                <Typography.Text
+                  style={{ cursor: "pointer" }}
+                  onClick={() => navigate(path.lectureDetail_rate)}
+                >
+                  #2.0 Let us know what you think
+                </Typography.Text>
+                <input
+                  type="checkbox"
+                  style={{ marginTop: 5 }}
+                  checked={rateState ? "checked" : ""}
                   disabled
                 />
               </Row>
@@ -218,7 +238,7 @@ const LectureDetailPageWelcome = ({
               </Text>
               .
             </Paragraph>
-            <Paragraph style={{ marginBottom: 50 }}>
+            <Paragraph style={{ marginBottom: 60 }}>
               After massive project practice and summaries, Ant Design, a design
               language for background applications, is refined by Ant UED Team,
               which aims to{" "}

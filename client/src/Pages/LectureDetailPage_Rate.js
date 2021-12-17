@@ -1,70 +1,54 @@
-import { Card, Collapse, Col, Row, Typography, Button } from "antd";
+import { Collapse, Col, Row, Typography, Button, Rate, Input } from "antd";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import path from "../lib/path";
-import { ArrowLeftOutlined } from "@ant-design/icons";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
+import { ArrowLeftOutlined, StarFilled } from "@ant-design/icons";
 
 const { Panel } = Collapse;
+const { TextArea } = Input;
+const { Paragraph } = Typography;
 
 const Container = styled.div`
   width: 1080px;
 `;
 
-const StyledCard = styled(Card)`
-  min-height: 240px;
-  min-width: 320px;
-`;
-
-const LectureDetailPageImage = ({
+const LectureDetailPageWelcome = ({
+  setRateState,
   welcomeState,
   movieState,
   imageState,
-  setImageState,
   rateState,
 }) => {
   const navigate = useNavigate();
-  const [image, setImage] = useState("");
+  const [text, setText] = useState("");
   const ref = useRef(null);
-
-  useEffect(() => {
-    const url = process.env.REACT_APP_API_URL || "http://localhost:4000";
-    setImage(`${url}/images/course-image.jpeg`);
-  }, []);
-
-  useEffect(() => {
-    // scroll event listener 등록
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      // scroll event listener 해제
-      window.removeEventListener("scroll", handleScroll);
-    };
-  });
 
   const onChange = (e) => {
     if (e.target.checked) {
-      setImageState(true);
-      localStorage.setItem("imageState", "true");
+      setRateState(true);
+      localStorage.setItem("rateState", "true");
     } else {
-      setImageState(null);
-      localStorage.removeItem("imageState");
+      setRateState(null);
+      localStorage.removeItem("rateState");
     }
   };
 
-  const handleScroll = () => {
-    const scrollHeight = document.documentElement.scrollHeight;
-    const scrollTop = document.documentElement.scrollTop;
-    const clientHeight = document.documentElement.clientHeight;
+  const handleChange = (e) => {
+    setText(e.target.value);
+  };
 
-    if (
-      scrollTop + clientHeight >= scrollHeight - 150 &&
-      !ref.current.checked
-    ) {
-      // 페이지 끝에 도달
-      console.log("도달");
-      ref.current.checked = true;
-      setImageState(true);
-      localStorage.setItem("imageState", "true");
+  const handleSubmit = () => {
+    if (text.length === 0) {
+      alert("Please write something");
+    } else {
+      if (!ref.current.checked) {
+        ref.current.checked = true;
+        setRateState(true);
+        localStorage.setItem("rateState", "true");
+      }
+      setText("");
+      alert("Thank You!");
     }
   };
 
@@ -141,11 +125,10 @@ const LectureDetailPageImage = ({
                   #1.1 이미지 예시
                 </Typography.Text>
                 <input
-                  ref={ref}
                   type="checkbox"
                   style={{ marginTop: 5 }}
                   checked={imageState ? "checked" : ""}
-                  onChange={onChange}
+                  disabled
                 />
               </Row>
             </Panel>
@@ -161,10 +144,11 @@ const LectureDetailPageImage = ({
                   #2.0 Let us know what you think
                 </Typography.Text>
                 <input
+                  ref={ref}
                   type="checkbox"
                   style={{ marginTop: 5 }}
                   checked={rateState ? "checked" : ""}
-                  disabled
+                  onChange={onChange}
                 />
               </Row>
             </Panel>
@@ -172,17 +156,60 @@ const LectureDetailPageImage = ({
         </Col>
         <Col span={16}>
           <Typography.Title style={{ textAlign: "left" }}>
-            #1.1 이미지 예시
+            #2.0 Let us know what you think
           </Typography.Title>
-          <StyledCard
-            hoverable
-            cover={<img alt="card" src={image} />}
-            style={{ marginBottom: 50 }}
-          ></StyledCard>
+          <Typography.Title
+            level={4}
+            style={{ textAlign: "left", marginTop: 40 }}
+          >
+            Before you go, please take a moment to rate this course.
+          </Typography.Title>
+          <hr style={{ border: "solid 0.1px #E2E2E2" }} />
+          <Rate
+            allowHalf
+            defaultValue={2.5}
+            character={(el) => (
+              <StarFilled
+                style={{ fontSize: "80px", width: 100, marginTop: 30 }}
+              />
+            )}
+          />
+          <Typography.Title
+            level={4}
+            style={{ textAlign: "left", marginTop: 90 }}
+          >
+            How can we be better?
+          </Typography.Title>
+          <hr style={{ border: "solid 0.1px #E2E2E2" }} />
+          <Paragraph style={{ marginTop: 15, textAlign: "left" }}>
+            Our learning experience team invites your honest feedback about this
+            course. What worked well for you? Where did we miss the mark? Please
+            submit your comments in the space below. We'll review it carefully
+            and use it to inform the improvement of our learning experiences.
+          </Paragraph>
+          <Paragraph style={{ marginTop: 15, textAlign: "left" }}>
+            If you have no feedback at this time, you can simply type "N/A" and
+            then submit your survey. Thank you!
+          </Paragraph>
+          <TextArea
+            rows={4}
+            type="text"
+            value={text}
+            style={{ marginBottom: 30 }}
+            onChange={handleChange}
+          />
+          <Button
+            type="primary"
+            block
+            style={{ marginBottom: 60, width: 150 }}
+            onClick={handleSubmit}
+          >
+            Submit
+          </Button>
         </Col>
       </Row>
     </Container>
   );
 };
 
-export default LectureDetailPageImage;
+export default LectureDetailPageWelcome;

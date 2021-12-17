@@ -37,6 +37,7 @@ function App() {
   const [welcomeState, setWelcomeState] = useState(null);
   const [movieState, setMovieState] = useState(null);
   const [imageState, setImageState] = useState(null);
+  const [rateState, setRateState] = useState(null);
 
   useEffect(() => {
     const urlA = process.env.REACT_APP_API_URL || "http://localhost:4000";
@@ -48,6 +49,7 @@ function App() {
     setWelcomeState(localStorage.getItem("welcomeState"));
     setMovieState(localStorage.getItem("movieState"));
     setImageState(localStorage.getItem("imageState"));
+    setRateState(localStorage.getItem("rateState"));
     if (localStorage.getItem("userInfo")) {
       setLogin(true);
       setUserInfo(JSON.parse(localStorage.getItem("userInfo")));
@@ -150,6 +152,8 @@ function App() {
           setMovieState={setMovieState}
           imageState={imageState}
           setImageState={setImageState}
+          rateState={rateState}
+          setRateState={setRateState}
         />
       </StyledContent>
       <Layout.Footer style={{}}>

@@ -6,6 +6,7 @@ import Home from "../Pages/Home";
 import LectureDetailPageWelcome from "../Pages/LectureDetailPage_Welcome";
 import LectureDetailPageMovie from "../Pages/LectureDetailPage_Movie";
 import LectureDetailPageImage from "../Pages/LectureDetailPage_Image";
+import LectureDetailPageRate from "../Pages/LectureDetailPage_Rate";
 import LoginPage from "../Pages/LoginPage";
 import RegisterPage from "../Pages/RegisterPage";
 import MyCoursePage from "../Pages/MyCoursePage";
@@ -25,6 +26,8 @@ const AppRouter = ({
   setMovieState,
   imageState,
   setImageState,
+  rateState,
+  setRateState,
 }) => {
   // const isLoggedIn = true;
   return (
@@ -90,6 +93,7 @@ const AppRouter = ({
                 welcomeState={welcomeState}
                 movieState={movieState}
                 imageState={imageState}
+                rateState={rateState}
               />
             }
           />
@@ -101,6 +105,7 @@ const AppRouter = ({
                 welcomeState={welcomeState}
                 movieState={movieState}
                 imageState={imageState}
+                rateState={rateState}
               />
             }
           />
@@ -112,6 +117,7 @@ const AppRouter = ({
                 setMovieState={setMovieState}
                 movieState={movieState}
                 imageState={imageState}
+                rateState={rateState}
               />
             }
           />
@@ -123,6 +129,19 @@ const AppRouter = ({
                 movieState={movieState}
                 setImageState={setImageState}
                 imageState={imageState}
+                rateState={rateState}
+              />
+            }
+          />
+          <Route
+            path={path.lectureDetail_rate}
+            element={
+              <LectureDetailPageRate
+                welcomeState={welcomeState}
+                movieState={movieState}
+                imageState={imageState}
+                setRateState={setRateState}
+                rateState={rateState}
               />
             }
           />
