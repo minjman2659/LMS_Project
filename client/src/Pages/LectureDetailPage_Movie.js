@@ -17,6 +17,7 @@ const LectureDetailPageMovie = ({
   setMovieState,
   imageState,
   rateState,
+  quizState,
 }) => {
   const navigate = useNavigate();
   const [movie, setMovie] = useState();
@@ -122,6 +123,27 @@ const LectureDetailPageMovie = ({
                   type="checkbox"
                   style={{ marginTop: 5 }}
                   checked={imageState ? "checked" : ""}
+                  disabled
+                />
+              </Row>
+              <Row
+                justify="space-between"
+                style={{
+                  padding: "0 8px",
+                  fontWeight: "normal",
+                  marginTop: "6px",
+                }}
+              >
+                <Typography.Text
+                  style={{ cursor: "pointer" }}
+                  onClick={() => navigate(path.lectureDetail_quiz)}
+                >
+                  #1.2 퀴즈 예시
+                </Typography.Text>
+                <input
+                  type="checkbox"
+                  style={{ marginTop: 5 }}
+                  checked={quizState ? "checked" : ""}
                   disabled
                 />
               </Row>

@@ -22,6 +22,7 @@ const CourseDetailPage = ({
   movieState,
   imageState,
   rateState,
+  quizState,
 }) => {
   const navigate = useNavigate();
   const [percent, setPercent] = useState(0);
@@ -32,10 +33,11 @@ const CourseDetailPage = ({
     if (movieState) arr.push(true);
     if (imageState) arr.push(true);
     if (rateState) arr.push(true);
+    if (quizState) arr.push(true);
     arr.length === 0
       ? setPercent(0)
-      : setPercent(parseInt((100 / 4) * arr.length));
-  }, [welcomeState, movieState, imageState, rateState]);
+      : setPercent(parseInt((100 / 5) * arr.length));
+  }, [welcomeState, movieState, imageState, rateState, quizState]);
 
   return (
     <Container>
@@ -127,6 +129,29 @@ const CourseDetailPage = ({
                 <Typography.Text
                   style={{ cursor: "pointer" }}
                   onClick={() => navigate(path.lectureDetail_image)}
+                >
+                  Watch now -&gt;
+                </Typography.Text>
+              </Row>
+              <Row
+                justify="space-between"
+                style={{
+                  padding: "0 8px",
+                  fontWeight: "normal",
+                  marginTop: "8px",
+                }}
+              >
+                {quizState ? (
+                  <Typography.Text>
+                    #1.2 퀴즈 예시 &nbsp;&nbsp;&nbsp; <CheckOutlined />
+                  </Typography.Text>
+                ) : (
+                  <Typography.Text>#1.2 퀴즈 예시</Typography.Text>
+                )}
+
+                <Typography.Text
+                  style={{ cursor: "pointer" }}
+                  onClick={() => navigate(path.lectureDetail_quiz)}
                 >
                   Watch now -&gt;
                 </Typography.Text>

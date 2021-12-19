@@ -13,12 +13,13 @@ const Container = styled.div`
   width: 1080px;
 `;
 
-const LectureDetailPageWelcome = ({
+const LectureDetailPageRate = ({
   setRateState,
   welcomeState,
   movieState,
   imageState,
   rateState,
+  quizState,
 }) => {
   const navigate = useNavigate();
   const [text, setText] = useState("");
@@ -131,6 +132,27 @@ const LectureDetailPageWelcome = ({
                   disabled
                 />
               </Row>
+              <Row
+                justify="space-between"
+                style={{
+                  padding: "0 8px",
+                  fontWeight: "normal",
+                  marginTop: "6px",
+                }}
+              >
+                <Typography.Text
+                  style={{ cursor: "pointer" }}
+                  onClick={() => navigate(path.lectureDetail_quiz)}
+                >
+                  #1.2 퀴즈 예시
+                </Typography.Text>
+                <input
+                  type="checkbox"
+                  style={{ marginTop: 5 }}
+                  checked={quizState ? "checked" : ""}
+                  disabled
+                />
+              </Row>
             </Panel>
             <Panel header="2. THANK YOU" key="3" style={{ fontWeight: "bold" }}>
               <Row
@@ -212,4 +234,4 @@ const LectureDetailPageWelcome = ({
   );
 };
 
-export default LectureDetailPageWelcome;
+export default LectureDetailPageRate;

@@ -7,6 +7,7 @@ import LectureDetailPageWelcome from "../Pages/LectureDetailPage_Welcome";
 import LectureDetailPageMovie from "../Pages/LectureDetailPage_Movie";
 import LectureDetailPageImage from "../Pages/LectureDetailPage_Image";
 import LectureDetailPageRate from "../Pages/LectureDetailPage_Rate";
+import LectureDetailPageQuiz from "../Pages/LectureDetailPage_Quiz";
 import LoginPage from "../Pages/LoginPage";
 import RegisterPage from "../Pages/RegisterPage";
 import MyCoursePage from "../Pages/MyCoursePage";
@@ -28,6 +29,8 @@ const AppRouter = ({
   setImageState,
   rateState,
   setRateState,
+  quizState,
+  setQuizState,
 }) => {
   // const isLoggedIn = true;
   return (
@@ -94,6 +97,7 @@ const AppRouter = ({
                 movieState={movieState}
                 imageState={imageState}
                 rateState={rateState}
+                quizState={quizState}
               />
             }
           />
@@ -106,6 +110,7 @@ const AppRouter = ({
                 movieState={movieState}
                 imageState={imageState}
                 rateState={rateState}
+                quizState={quizState}
               />
             }
           />
@@ -118,6 +123,7 @@ const AppRouter = ({
                 movieState={movieState}
                 imageState={imageState}
                 rateState={rateState}
+                quizState={quizState}
               />
             }
           />
@@ -130,6 +136,7 @@ const AppRouter = ({
                 setImageState={setImageState}
                 imageState={imageState}
                 rateState={rateState}
+                quizState={quizState}
               />
             }
           />
@@ -142,6 +149,20 @@ const AppRouter = ({
                 imageState={imageState}
                 setRateState={setRateState}
                 rateState={rateState}
+                quizState={quizState}
+              />
+            }
+          />
+          <Route
+            path={path.lectureDetail_quiz}
+            element={
+              <LectureDetailPageQuiz
+                welcomeState={welcomeState}
+                movieState={movieState}
+                imageState={imageState}
+                rateState={rateState}
+                setQuizState={setQuizState}
+                quizState={quizState}
               />
             }
           />

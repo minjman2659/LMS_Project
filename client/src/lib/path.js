@@ -8,6 +8,7 @@ const path = {
   lectureDetail_movie: "/lecture-detail-movie",
   lectureDetail_image: "/lecture-detail-image",
   lectureDetail_rate: "/lecture-detail-rate",
+  lectureDetail_quiz: "/lecture-detail-quiz",
   myCourses: "/my-courses",
 };
 

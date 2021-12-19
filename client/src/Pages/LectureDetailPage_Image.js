@@ -22,6 +22,7 @@ const LectureDetailPageImage = ({
   imageState,
   setImageState,
   rateState,
+  quizState,
 }) => {
   const navigate = useNavigate();
   const [image, setImage] = useState("");
@@ -146,6 +147,27 @@ const LectureDetailPageImage = ({
                   style={{ marginTop: 5 }}
                   checked={imageState ? "checked" : ""}
                   onChange={onChange}
+                />
+              </Row>
+              <Row
+                justify="space-between"
+                style={{
+                  padding: "0 8px",
+                  fontWeight: "normal",
+                  marginTop: "6px",
+                }}
+              >
+                <Typography.Text
+                  style={{ cursor: "pointer" }}
+                  onClick={() => navigate(path.lectureDetail_quiz)}
+                >
+                  #1.2 퀴즈 예시
+                </Typography.Text>
+                <input
+                  type="checkbox"
+                  style={{ marginTop: 5 }}
+                  checked={quizState ? "checked" : ""}
+                  disabled
                 />
               </Row>
             </Panel>
