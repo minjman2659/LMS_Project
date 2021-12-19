@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
 const { consumeToken, errorHandler, missingPath } = require('middleware');
 const imagesDir = require('lib/images-dir');
@@ -19,6 +20,7 @@ app.use(
   }),
 );
 app.use(cookieParser());
+app.use(logger('dev'));
 
 app.use('/images', express.static(imagesDir));
 app.use('/movies', moviesDir);
