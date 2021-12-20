@@ -23,7 +23,7 @@ const LectureDetailPageWelcome = ({
   movieState,
   imageState,
   rateState,
-  quizState
+  quizState,
 }) => {
   const navigate = useNavigate();
   const ref = useRef(null);
@@ -77,7 +77,7 @@ const LectureDetailPageWelcome = ({
             <ArrowLeftOutlined />
             &nbsp;Back to the Course List
           </Button>
-          <Collapse defaultActiveKey={["1", "2", "3", "4"]}>
+          <Collapse defaultActiveKey={["1", "2", "3"]}>
             <Panel
               header="0. INTRODUCTION"
               key="1"

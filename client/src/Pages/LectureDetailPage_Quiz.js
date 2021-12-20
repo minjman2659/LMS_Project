@@ -1,4 +1,4 @@
-import { Card, Collapse, Col, Row, Typography, Button } from "antd";
+import { Collapse, Col, Row, Typography, Button } from "antd";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import path from "../lib/path";
@@ -7,12 +7,13 @@ import { ArrowLeftOutlined } from "@ant-design/icons";
 import { questions } from "../mock/Question";
 
 const { Panel } = Collapse;
+const { Paragraph } = Typography;
 
-const LandingQuizBox = styled.article`
-  width: 500px;
+const QuizBox = styled.article`
+  width: 700px;
   height: 500px;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 30px;
   border-radius: 15px;
   padding: 20px;
   box-sizing: border-box;
@@ -20,7 +21,7 @@ const LandingQuizBox = styled.article`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #b4aee8;
+  background-color: #364d79;
   @media screen and (max-width: 700px) {
     width: 400px;
   }
@@ -30,7 +31,7 @@ const LandingQuizBox = styled.article`
   }
 `;
 
-const LandingQuizScore = styled.div`
+const QuizScore = styled.div`
   align-items: center;
   text-align: center;
   word-break: break-all;
@@ -76,43 +77,33 @@ const LandingQuizScore = styled.div`
   }
 `;
 
-const LandingQuizQuestion = styled.div`
+const QuizQuestion = styled.div`
   margin-bottom: 20px;
   width: 100%;
   color: #fff;
-  > img {
-    display: block;
-    width: 300px;
-    height: 300px;
-    margin: auto;
-    @media only screen and (max-width: 400px) {
-      width: 200px;
-      height: 200px;
-    }
-  }
 `;
 
-const LandingQuizChoices = styled.div`
+const QuizChoices = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
 
-const LandingQuizCount = styled.div`
+const QuizCount = styled.div`
   margin-bottom: 20px;
   > span {
     font-size: 28px;
   }
 `;
 
-const LandingQuizText = styled.div`
+const QuizText = styled.div`
   width: 100%;
   font-size: 20px;
 `;
 
-const LandingQuizChoiceButton = styled.button`
-  width: 100%;
+const QuizChoiceButton = styled.button`
+  width: 90%;
   height: 70px;
   font-size: 14px;
   background-color: #fff;
@@ -120,6 +111,8 @@ const LandingQuizChoiceButton = styled.button`
   display: flex;
   padding: 5px;
   margin-bottom: 10px;
+  margin-left: 33px;
+  margin-top: 10px;
   justify-content: center;
   align-items: center;
   cursor: pointer;
@@ -128,7 +121,7 @@ const LandingQuizChoiceButton = styled.button`
     height: 50px;
   }
   :hover {
-    background-color: #440a67;
+    background-color: tomato;
     color: #fff;
   }
 `;
@@ -136,19 +129,6 @@ const LandingQuizChoiceButton = styled.button`
 const Container = styled.div`
   width: 1080px;
 `;
-
-const StyledCard = styled(Card)`
-  min-height: 240px;
-  min-width: 320px;
-`;
-
-const contentStyle = {
-  height: "490px",
-  color: "#fff",
-  lineHeight: "160px",
-  textAlign: "center",
-  background: "#364d79",
-};
 
 const LectureDetailPageQuiz = ({
   welcomeState,
@@ -201,7 +181,7 @@ const LectureDetailPageQuiz = ({
             <ArrowLeftOutlined />
             &nbsp;Back to the Course List
           </Button>
-          <Collapse defaultActiveKey={["1", "2", "3", "4"]}>
+          <Collapse defaultActiveKey={["1", "2", "3"]}>
             <Panel
               header="0. INTRODUCTION"
               key="1"
@@ -315,50 +295,65 @@ const LectureDetailPageQuiz = ({
           <Typography.Title style={{ textAlign: "left" }}>
             #1.2 Quiz
           </Typography.Title>
-          <LandingQuizBox>
+          <QuizBox>
             {showScore ? ( // 점수 화면 보임 여부가 true라면
-              <LandingQuizScore>
+              <QuizScore>
                 <img src={""} alt="You Quiz?" />
                 <div>
                   <p>총 {score}개를 맞추셨습니다!</p>
                 </div>
                 {/*점수 보여줌 */}
-              </LandingQuizScore>
+              </QuizScore>
             ) : (
               // 점수 화면 보임 여부가 false 라면(=아직 풀 문제가 남음)
               <>
-                <LandingQuizQuestion>
+                <QuizQuestion>
                   {score === -1 ? (
-                    <img src={""} alt="You Quiz?" />
+                    <div>
+                      <Typography.Title level={1} style={{ color: "#fff" }}>
+                        POP Quiz
+                      </Typography.Title>
+                      <Paragraph
+                        style={{
+                          fontSize: 20,
+                          marginTop: 30,
+                          color: "#e9e9e9",
+                        }}
+                      >
+                        문제는 총 3문제가 출제됩니다.
+                        <br /> 2문제 이상 맞을 시 통과할 수 있으며,
+                        <br /> 재시험을 통해 다시 테스트를 볼 수 있습니다.
+                        <br />
+                        <br /> Good Luck!
+                      </Paragraph>
+                    </div>
                   ) : (
-                    <LandingQuizCount>
+                    <QuizCount>
                       <span>Question {currentQuestion}</span>/
                       {questions.length - 1}
-                    </LandingQuizCount>
+                    </QuizCount>
                   )}
-                  <LandingQuizText>
-                    {questions[currentQuestion].questionText}
-                  </LandingQuizText>
-                </LandingQuizQuestion>
+                  <QuizText>{questions[currentQuestion].questionText}</QuizText>
+                </QuizQuestion>
 
                 {/* 선택지 */}
-                <LandingQuizChoices>
+                <QuizChoices>
                   {questions[currentQuestion].answerOptions.map(
                     (answerOption, idx) => (
-                      <LandingQuizChoiceButton
+                      <QuizChoiceButton
                         key={idx}
                         onClick={() =>
                           handleAnswerOptionClick(answerOption.isCorrect)
                         }
                       >
                         {answerOption.answerText}
-                      </LandingQuizChoiceButton>
+                      </QuizChoiceButton>
                     )
                   )}
-                </LandingQuizChoices>
+                </QuizChoices>
               </>
             )}
-          </LandingQuizBox>
+          </QuizBox>
         </Col>
       </Row>
     </Container>
