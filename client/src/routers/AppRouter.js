@@ -4,7 +4,7 @@ import CourseDetailPage from "../Pages/CourseDetailPage";
 import CourseInfoPage from "../Pages/CourseInfoPage";
 import Home from "../Pages/Home";
 import LectureDetailPageWelcome from "../Pages/LectureDetailPage_Welcome";
-import LectureDetailPageMovie from "../Pages/LectureDetailPage_Movie";
+import LectureDetailPageVideo from "../Pages/LectureDetailPage_Video";
 import LectureDetailPageImage from "../Pages/LectureDetailPage_Image";
 import LectureDetailPageRate from "../Pages/LectureDetailPage_Rate";
 import LectureDetailPageQuiz from "../Pages/LectureDetailPage_Quiz";
@@ -23,8 +23,8 @@ const AppRouter = ({
   setCourseState,
   welcomeState,
   setWelcomeState,
-  movieState,
-  setMovieState,
+  videoState,
+  setVideoState,
   imageState,
   setImageState,
   rateState,
@@ -94,7 +94,7 @@ const AppRouter = ({
               <CourseDetailPage
                 courseState={courseState}
                 welcomeState={welcomeState}
-                movieState={movieState}
+                videoState={videoState}
                 imageState={imageState}
                 rateState={rateState}
                 quizState={quizState}
@@ -107,7 +107,7 @@ const AppRouter = ({
               <LectureDetailPageWelcome
                 setWelcomeState={setWelcomeState}
                 welcomeState={welcomeState}
-                movieState={movieState}
+                videoState={videoState}
                 imageState={imageState}
                 rateState={rateState}
                 quizState={quizState}
@@ -115,12 +115,12 @@ const AppRouter = ({
             }
           />
           <Route
-            path={path.lectureDetail_movie}
+            path={path.lectureDetail_video}
             element={
-              <LectureDetailPageMovie
+              <LectureDetailPageVideo
                 welcomeState={welcomeState}
-                setMovieState={setMovieState}
-                movieState={movieState}
+                setVideoState={setVideoState}
+                videoState={videoState}
                 imageState={imageState}
                 rateState={rateState}
                 quizState={quizState}
@@ -132,7 +132,7 @@ const AppRouter = ({
             element={
               <LectureDetailPageImage
                 welcomeState={welcomeState}
-                movieState={movieState}
+                videoState={videoState}
                 setImageState={setImageState}
                 imageState={imageState}
                 rateState={rateState}
@@ -145,7 +145,7 @@ const AppRouter = ({
             element={
               <LectureDetailPageRate
                 welcomeState={welcomeState}
-                movieState={movieState}
+                videoState={videoState}
                 imageState={imageState}
                 setRateState={setRateState}
                 rateState={rateState}
@@ -158,7 +158,7 @@ const AppRouter = ({
             element={
               <LectureDetailPageQuiz
                 welcomeState={welcomeState}
-                movieState={movieState}
+                videoState={videoState}
                 imageState={imageState}
                 rateState={rateState}
                 setQuizState={setQuizState}

@@ -7,7 +7,7 @@ node_modules
 
 # upload
 public/images/*
-public/movies/*
+public/videos/*
 
 # logs
 yarn-error.log

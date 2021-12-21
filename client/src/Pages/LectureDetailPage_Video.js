@@ -11,38 +11,38 @@ const Container = styled.div`
   width: 1080px;
 `;
 
-const LectureDetailPageMovie = ({
+const LectureDetailPageVideo = ({
   welcomeState,
-  movieState,
-  setMovieState,
+  videoState,
+  setVideoState,
   imageState,
   rateState,
   quizState,
 }) => {
   const navigate = useNavigate();
-  const [movie, setMovie] = useState();
+  const [video, setVideo] = useState();
   const ref = useRef(null);
 
   useEffect(() => {
     const url = process.env.REACT_APP_API_URL || "http://localhost:4000";
-    setMovie(`${url}/movies/course-movie.mp4`);
+    setVideo(`${url}/videos/course-video.mp4`);
   }, []);
 
   const onChange = (e) => {
     if (e.target.checked) {
-      setMovieState(true);
-      localStorage.setItem("movieState", "true");
+      setVideoState(true);
+      localStorage.setItem("videoState", "true");
     } else {
-      setMovieState(null);
-      localStorage.removeItem("movieState");
+      setVideoState(null);
+      localStorage.removeItem("videoState");
     }
   };
 
   const handleEnded = () => {
     if (!ref.current.checked) {
       ref.current.checked = true;
-      setMovieState(true);
-      localStorage.setItem("movieState", "true");
+      setVideoState(true);
+      localStorage.setItem("videoState", "true");
     }
   };
 
@@ -93,7 +93,7 @@ const LectureDetailPageMovie = ({
               >
                 <Typography.Text
                   style={{ cursor: "pointer", color: "blue" }}
-                  onClick={() => navigate(path.lectureDetail_movie)}
+                  onClick={() => navigate(path.lectureDetail_video)}
                 >
                   #1.0 동영상 예시
                 </Typography.Text>
@@ -101,7 +101,7 @@ const LectureDetailPageMovie = ({
                   ref={ref}
                   type="checkbox"
                   style={{ marginTop: 5 }}
-                  checked={movieState ? "checked" : ""}
+                  checked={videoState ? "checked" : ""}
                   onChange={onChange}
                 />
               </Row>
@@ -180,7 +180,7 @@ const LectureDetailPageMovie = ({
             autobuffer="true"
             onEnded={handleEnded}
           >
-            <source src={movie} type="video/mp4"></source>
+            <source src={video} type="video/mp4"></source>
           </video>
         </Col>
       </Row>
@@ -188,4 +188,4 @@ const LectureDetailPageMovie = ({
   );
 };
 
-export default LectureDetailPageMovie;
+export default LectureDetailPageVideo;

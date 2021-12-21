@@ -20,7 +20,7 @@ const StyledCard = styled(Card)`
 const LectureDetailPageWelcome = ({
   setWelcomeState,
   welcomeState,
-  movieState,
+  videoState,
   imageState,
   rateState,
   quizState,
@@ -112,14 +112,14 @@ const LectureDetailPageWelcome = ({
               >
                 <Typography.Text
                   style={{ cursor: "pointer" }}
-                  onClick={() => navigate(path.lectureDetail_movie)}
+                  onClick={() => navigate(path.lectureDetail_video)}
                 >
                   #1.0 동영상 예시
                 </Typography.Text>
                 <input
                   type="checkbox"
                   style={{ marginTop: 5 }}
-                  checked={movieState ? "checked" : ""}
+                  checked={videoState ? "checked" : ""}
                   disabled
                 />
               </Row>

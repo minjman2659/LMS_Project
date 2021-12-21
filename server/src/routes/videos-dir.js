@@ -1,10 +1,11 @@
 const router = require('express').Router();
+
 const url = require('url');
 const fs = require('fs');
 
 router.get('*', (req, res) => {
   const { pathname } = url.parse(req.url, true);
-  const filePath = `public/movies${pathname}`;
+  const filePath = `public/videos${pathname}`;
 
   const stat = fs.statSync(filePath);
   const fileSize = stat.size;

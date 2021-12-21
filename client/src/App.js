@@ -35,7 +35,7 @@ function App() {
   const [myCourses, setMyCourses] = useState([]);
   const [courseState, setCourseState] = useState({});
   const [welcomeState, setWelcomeState] = useState(null);
-  const [movieState, setMovieState] = useState(null);
+  const [videoState, setVideoState] = useState(null);
   const [imageState, setImageState] = useState(null);
   const [rateState, setRateState] = useState(null);
   const [quizState, setQuizState] = useState(null);
@@ -48,7 +48,7 @@ function App() {
     };
     setCourseState(JSON.parse(localStorage.getItem("course")));
     setWelcomeState(localStorage.getItem("welcomeState"));
-    setMovieState(localStorage.getItem("movieState"));
+    setVideoState(localStorage.getItem("videoState"));
     setImageState(localStorage.getItem("imageState"));
     setRateState(localStorage.getItem("rateState"));
     setQuizState(localStorage.getItem("quizState"));
@@ -150,8 +150,8 @@ function App() {
           setCourseState={setCourseState}
           welcomeState={welcomeState}
           setWelcomeState={setWelcomeState}
-          movieState={movieState}
-          setMovieState={setMovieState}
+          videoState={videoState}
+          setVideoState={setVideoState}
           imageState={imageState}
           setImageState={setImageState}
           rateState={rateState}

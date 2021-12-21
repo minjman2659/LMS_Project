@@ -5,7 +5,7 @@ const logger = require('morgan');
 
 const { consumeToken, errorHandler, missingPath } = require('middleware');
 const imagesDir = require('lib/images-dir');
-const moviesDir = require('lib/movies-dir');
+const videosDir = require('routes/videos-dir');
 
 const routes = require('./routes');
 
@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(logger('dev'));
 
 app.use('/images', express.static(imagesDir));
-app.use('/movies', moviesDir);
+app.use('/videos', videosDir);
 
 app.use(consumeToken);
 

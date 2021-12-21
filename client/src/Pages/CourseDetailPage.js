@@ -19,7 +19,7 @@ const StyledCard = styled(Card)`
 const CourseDetailPage = ({
   courseState,
   welcomeState,
-  movieState,
+  videoState,
   imageState,
   rateState,
   quizState,
@@ -30,14 +30,14 @@ const CourseDetailPage = ({
   useEffect(() => {
     const arr = [];
     if (welcomeState) arr.push(true);
-    if (movieState) arr.push(true);
+    if (videoState) arr.push(true);
     if (imageState) arr.push(true);
     if (rateState) arr.push(true);
     if (quizState) arr.push(true);
     arr.length === 0
       ? setPercent(0)
       : setPercent(parseInt((100 / 5) * arr.length));
-  }, [welcomeState, movieState, imageState, rateState, quizState]);
+  }, [welcomeState, videoState, imageState, rateState, quizState]);
 
   return (
     <Container>
@@ -96,7 +96,7 @@ const CourseDetailPage = ({
                   fontWeight: "normal",
                 }}
               >
-                {movieState ? (
+                {videoState ? (
                   <Typography.Text>
                     #1.0 동영상 예시 &nbsp;&nbsp;&nbsp; <CheckOutlined />
                   </Typography.Text>
@@ -105,7 +105,7 @@ const CourseDetailPage = ({
                 )}
                 <Typography.Text
                   style={{ cursor: "pointer" }}
-                  onClick={() => navigate(path.lectureDetail_movie)}
+                  onClick={() => navigate(path.lectureDetail_video)}
                 >
                   Watch now -&gt;
                 </Typography.Text>
