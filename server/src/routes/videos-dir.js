@@ -12,7 +12,7 @@ router.get('*', (req, res) => {
   const { range } = req.headers;
   console.log(range);
 
-  const MAX_CHUNK_SIZE = 1000 * 1000;
+  const MAX_CHUNK_SIZE = 1000 * 1000 * 50;
   // range 헤더 파싱
   const parts = range.replace(/bytes=/, '').split('-');
   // 재생 구간 설정
