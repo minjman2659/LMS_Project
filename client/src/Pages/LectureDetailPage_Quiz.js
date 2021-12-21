@@ -13,7 +13,8 @@ const QuizBox = styled.article`
   width: 700px;
   height: 500px;
   margin: auto;
-  margin-top: 30px;
+  margin-top: 20px;
+  margin-bottom: 40px;
   border-radius: 15px;
   padding: 20px;
   box-sizing: border-box;
@@ -38,9 +39,8 @@ const QuizScore = styled.div`
   width: 100%;
   > img {
     display: block;
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 20px;
+    width: 400px;
+    margin: 0 auto -15px;
   }
   > div {
     height: 200px;
@@ -63,15 +63,19 @@ const QuizScore = styled.div`
     > button {
       cursor: pointer;
       margin-top: 10px;
-      background-color: #440a67;
+      background-color: #364d79;
       color: #fff;
       border-radius: 50px;
       width: 40%;
       height: 50px;
-      font-size: 12px;
+      font-size: 15px;
       @media only screen and (max-width: 400px) {
         height: 30px;
         font-size: 10px;
+      }
+      :hover {
+        background-color: tomato;
+        color: #fff;
       }
     }
   }
@@ -146,11 +150,39 @@ const LectureDetailPageQuiz = ({
 
   const onChange = (e) => {
     if (e.target.checked) {
-      setQuizState(true);
-      localStorage.setItem("quizState", "true");
+      alert("퀴즈를 풀어야지만 체킹이 진행됩니다.");
     } else {
       setQuizState(null);
       localStorage.removeItem("quizState");
+    }
+  };
+
+  const passClick = () => {
+    if (!checkRef.current.checked) {
+      alert("Congratulation!");
+      checkRef.current.checked = true;
+      setQuizState(true);
+      localStorage.setItem("quizState", "true");
+    }
+  };
+
+  const failClick = () => {
+    window.location.replace("/lecture-detail-quiz");
+  };
+
+  const passOrFail = () => {
+    if (score >= 2) {
+      return {
+        src: "https://bit.ly/3slXQj3",
+        clickEvent: passClick,
+        message: "제출하기",
+      };
+    } else {
+      return {
+        src: "https://bit.ly/3perS6n",
+        clickEvent: failClick,
+        message: "다시풀기",
+      };
     }
   };
 
@@ -298,9 +330,12 @@ const LectureDetailPageQuiz = ({
           <QuizBox>
             {showScore ? ( // 점수 화면 보임 여부가 true라면
               <QuizScore>
-                <img src={""} alt="You Quiz?" />
+                <img src={passOrFail().src} alt="img" />
                 <div>
                   <p>총 {score}개를 맞추셨습니다!</p>
+                  <button onClick={passOrFail().clickEvent}>
+                    {passOrFail().message}
+                  </button>
                 </div>
                 {/*점수 보여줌 */}
               </QuizScore>
