@@ -12,6 +12,7 @@ const routes = require('./routes');
 // express를 이용한 서버 구현
 const app = express();
 
+app.use(logger('dev'));
 app.use(express.json({ limit: '30mb' }));
 app.use(
   cors({
@@ -20,7 +21,6 @@ app.use(
   }),
 );
 app.use(cookieParser());
-app.use(logger('dev'));
 
 app.use('/images', express.static(imagesDir));
 app.use('/videos', videosDir);
