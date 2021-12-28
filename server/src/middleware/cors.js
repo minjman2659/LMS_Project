@@ -1,19 +1,21 @@
-const defaultCorsHeader = {
-  'Access-Control-Allow-Origin': true,
-  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, Accept',
-  'Access-Control-Allow-Credentials': true,
-  'Access-Control-Max-Age': 10,
-};
-
 const cors = (req, res, next) => {
-  res.writeHead(204, defaultCorsHeader);
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PUT, PATCH, DELETE, OPTIONS',
+  );
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+  );
 
   if (req.method === 'OPTIONS') {
-    res.end();
+    res.sendStatus(204);
+    return;
   }
 
-  return next();
+  next();
 };
 
 module.exports = cors;
