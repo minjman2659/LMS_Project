@@ -3,7 +3,12 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const { consumeToken, errorHandler, missingPath } = require('middleware');
+const {
+  consumeToken,
+  errorHandler,
+  missingPath,
+  // cors: customCors,
+} = require('middleware');
 const imagesDir = require('lib/images-dir');
 const videosDir = require('routes/videos-dir');
 
@@ -20,6 +25,7 @@ app.use(
     credentials: true,
   }),
 );
+// app.use(customCors);
 app.use(cookieParser());
 
 app.use('/images', express.static(imagesDir));
