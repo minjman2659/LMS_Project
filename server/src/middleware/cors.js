@@ -1,8 +1,11 @@
 const cors = (req, res, next) => {
-  // not allowed list
+  const allowedOrigin = ['http://localhost:3000'];
 
-  // allowed => whiteList
-  res.header('Access-Control-Allow-Origin', req.get('origin'));
+  // whiteList
+  if (allowedOrigin.includes(req.get('origin'))) {
+    res.header('Access-Control-Allow-Origin', req.get('origin')); // origin: true
+  }
+
   res.header('Access-Control-Allow-Credentials', true);
   res.header(
     'Access-Control-Allow-Methods',

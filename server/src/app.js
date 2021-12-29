@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors');
+// const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
@@ -7,7 +7,7 @@ const {
   consumeToken,
   errorHandler,
   missingPath,
-  // cors: customCors,
+  cors: customCors,
 } = require('middleware');
 const imagesDir = require('lib/images-dir');
 const videosDir = require('routes/videos-dir');
@@ -19,13 +19,13 @@ const app = express();
 
 app.use(logger('dev'));
 app.use(express.json({ limit: '30mb' }));
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  }),
-);
-// app.use(customCors);
+// app.use(
+//   cors({
+//     origin: true,
+//     credentials: true,
+//   }),
+// );
+app.use(customCors);
 app.use(cookieParser());
 
 app.use('/images', express.static(imagesDir));
