@@ -10,7 +10,7 @@ const {
   cors: customCors,
 } = require('middleware');
 const imagesDir = require('lib/images-dir');
-const videosDir = require('routes/videos-dir');
+const videosDir = require('lib/videos-dir');
 
 const routes = require('./routes');
 

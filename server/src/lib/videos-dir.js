@@ -1,9 +1,9 @@
-const router = require('express').Router();
+const videoRouter = require('express').Router();
 
 const url = require('url');
 const fs = require('fs');
 
-router.get('*', (req, res) => {
+videoRouter.get('*', (req, res) => {
   const { pathname } = url.parse(req.url, true);
   const filePath = `public/videos${pathname}`;
 
@@ -32,4 +32,4 @@ router.get('*', (req, res) => {
   readStream.pipe(res);
 });
 
-module.exports = router;
+module.exports = videoRouter;
