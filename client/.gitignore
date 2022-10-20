@@ -1,4 +1,8 @@
 /node_modules
 
+# environment
+.env.production
+.env.development
+
 # other
 .DS_Store
